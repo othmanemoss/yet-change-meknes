@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0F172A">
+<title>YET-CHANGE Meknès – Bureau de change, centre-ville, Hamria</title>
+<meta name="description" content="YET-CHANGE, bureau de change en plein centre-ville de Meknès (Rue d’Accra, Passage Karzazi, Hamria). Cours du jour EUR, USD, GBP, CAD, CHF, SAR, AED.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+tailwind.config = { theme: { extend: {
+  colors: { snow: '#F8FAFC', night: '#0F172A', mint: '#10B981' },
+  fontFamily: { sans: ['Inter', 'Noto Sans Arabic', 'system-ui', 'sans-serif'] }
+} } };
+</script>
+<style type="text/tailwindcss">
+  @layer components {
+    .btn { --sweep:#0F172A; --fg-h:#10B981; position:relative; isolation:isolate; overflow:hidden; display:inline-flex; align-items:center; justify-content:center; padding:.9rem 1.6rem; font-weight:700; text-align:center; line-height:1.25;
+      border-start-start-radius:1.4rem; border-end-end-radius:1.4rem; border-start-end-radius:.35rem; border-end-start-radius:.35rem;
+      transition:border-radius .55s cubic-bezier(.22,1,.36,1), transform .25s cubic-bezier(.22,1,.36,1), color .35s; }
+    .btn::before { content:""; position:absolute; inset:0; z-index:-1; background:var(--sweep); transform:scaleX(0); transform-origin:left center; transition:transform .55s cubic-bezier(.22,1,.36,1); }
+    [dir=rtl] .btn::before { transform-origin:right center; }
+    .btn:hover, .btn:focus-visible { color:var(--fg-h); border-start-start-radius:.35rem; border-end-end-radius:.35rem; border-start-end-radius:1.4rem; border-end-start-radius:1.4rem; }
+    .btn:hover::before, .btn:focus-visible::before { transform:scaleX(1); }
+    .btn:active { transform:scale(.96); }
+    .btn:focus-visible { outline:2px solid #10B981; outline-offset:3px; }
+    .btn-mint { background:#10B981; color:#0F172A; }
+    .btn-line { color:#fff; box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35); --sweep:#fff; --fg-h:#0F172A; }
+    .btn-out { color:#0F172A; box-shadow:inset 0 0 0 1.5px #CBD5E1; --sweep:#0F172A; --fg-h:#fff; }
+    .on-dark .btn-mint { --sweep:#fff; --fg-h:#0F172A; }
+    .field { @apply mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-3 text-base font-semibold text-night focus:border-mint focus:outline-none focus:ring-2 focus:ring-mint/40; }
+    .lbl { @apply text-sm font-medium text-slate-600; }
+    .card { @apply rounded-2xl bg-white ring-1 ring-slate-200; }
+  }
+  html { scroll-behavior: smooth; }
+  .tnum { font-variant-numeric: tabular-nums; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .animate-pulse { animation: none; } .btn, .btn::before { transition: none; } }
+</style>
+</head>
+
+<body class="bg-snow font-sans text-night antialiased">
+
+<header class="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur">
+  <div class="mx-auto flex max-w-5xl items-center justify-between gap-2 px-4 py-2.5">
+    <a href="#top" class="flex items-center gap-2.5">
+      <span class="grid h-9 w-9 place-items-center rounded-lg bg-night text-lg font-extrabold text-mint">Y</span>
+      <span class="leading-tight"><span class="block font-extrabold tracking-tight">YET-CHANGE</span><span data-i18n="tagline" class="block text-xs text-slate-500"></span></span>
+    </a>
+    <div class="flex items-center gap-2">
+      <div class="flex rounded-lg bg-slate-100 p-0.5" role="group" aria-label="Langue">
+        <button data-lang="fr" type="button">FR</button>
+        <button data-lang="ar" type="button">AR</button>
+        <button data-lang="en" type="button">EN</button>
+      </div>
+      <span data-pill data-m="1"></span>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO : EMPLACEMENT CENTRE-VILLE ============ -->
+<section class="on-dark bg-night pb-16 pt-9 text-white sm:pt-14 sm:pb-20" style="background-image:radial-gradient(60% 90% at 90% 0%,rgba(16,185,129,.28),transparent)">
+  <div class="mx-auto max-w-5xl px-4">
+    <div class="flex flex-wrap items-center gap-2">
+      <span class="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-sm font-semibold ring-1 ring-white/15"><span class="text-amber-300">★</span><span id="rating"></span></span>
+      <span data-pill-full></span>
+    </div>
+    <h1 data-i18n="h1" class="mt-4 max-w-3xl text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl"></h1>
+    <p data-i18n="lead" class="mt-3 max-w-2xl text-base text-slate-300 sm:text-lg"></p>
+    <ul class="mt-4 flex flex-wrap gap-2 text-sm font-semibold">
+      <li data-i18n="c1" class="rounded-full bg-mint/15 px-3 py-1 text-emerald-200 ring-1 ring-mint/30"></li>
+      <li data-i18n="c2" class="rounded-full bg-mint/15 px-3 py-1 text-emerald-200 ring-1 ring-mint/30"></li>
+      <li data-i18n="c3" class="rounded-full bg-mint/15 px-3 py-1 text-emerald-200 ring-1 ring-mint/30"></li>
+    </ul>
+    <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+      <a id="gps" data-i18n="cta_gps" href="#" target="_blank" rel="noopener" class="btn btn-mint"></a>
+      <a data-wa="wa_main" data-i18n="cta_wa" href="#" target="_blank" rel="noopener" class="btn btn-line"></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COURS DU JOUR ============ -->
+<section class="relative mx-auto -mt-10 max-w-4xl px-4 sm:-mt-12">
+  <div class="card overflow-hidden shadow-lg shadow-slate-900/5">
+    <div class="flex flex-wrap items-end justify-between gap-x-4 gap-y-1 px-4 pt-5 sm:px-6">
+      <div>
+        <h2 data-i18n="rates_h" class="text-2xl font-extrabold tracking-tight"></h2>
+        <p data-i18n="rates_sub" class="text-sm text-slate-500"></p>
+      </div>
+      <p class="text-sm text-slate-500"><span id="updated" class="font-semibold text-night"></span><span id="src" data-i18n="src_manual" class="ms-2 hidden rounded bg-amber-50 px-2 py-0.5 text-xs text-amber-800 ring-1 ring-amber-200"></span></p>
+    </div>
+    <table class="mt-3 w-full text-start">
+      <thead class="bg-snow text-xs text-slate-600 sm:text-sm">
+        <tr>
+          <th data-i18n="th_cur" class="px-3 py-2.5 text-start font-medium sm:px-6"></th>
+          <th class="px-1 py-2.5 text-end font-medium sm:px-3"><span data-i18n="th_buy"></span><span class="block text-[11px] font-normal text-slate-400">MAD</span></th>
+          <th class="px-1 py-2.5 text-end font-medium sm:px-3"><span data-i18n="th_sell"></span><span class="block text-[11px] font-normal text-slate-400">MAD</span></th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p data-i18n="legal" class="border-t border-slate-100 bg-snow px-4 py-3 text-xs leading-relaxed text-slate-600 sm:px-6 sm:text-sm"></p>
+  </div>
+
+  <div class="card mt-4 p-4 sm:p-5">
+    <h3 data-i18n="dot_h" class="font-bold"></h3>
+    <p id="dotP" class="mt-1 text-sm text-slate-600"></p>
+  </div>
+</section>
+
+<!-- ============ ADRESSE, HORAIRES, CARTE ============ -->
+<section class="mx-auto mt-14 max-w-5xl px-4">
+  <div class="grid gap-6 md:grid-cols-2">
+    <div>
+      <h2 data-i18n="map_h" class="text-3xl font-extrabold tracking-tight"></h2>
+      <dl class="mt-5 space-y-4">
+        <div><dt data-i18n="addr" class="text-sm text-slate-500"></dt>
+          <dd class="font-semibold">YET-CHANGE<br><span data-i18n="addr_txt"></span></dd></div>
+        <div><dt data-i18n="phone" class="text-sm text-slate-500"></dt>
+          <dd><a href="tel:+212535510040" dir="ltr" class="tnum text-lg font-bold text-emerald-700">+212 5 35 51 00 40</a></dd></div>
+      </dl>
+      <div class="mt-5 flex flex-col gap-3 sm:flex-row">
+        <a data-wa="wa_main" data-i18n="cta_wa" href="#" target="_blank" rel="noopener" class="btn btn-mint"></a>
+        <a id="gps2" data-i18n="cta_gps" href="#" target="_blank" rel="noopener" class="btn btn-out"></a>
+      </div>
+    </div>
+    <div class="card p-5 sm:p-6">
+      <div class="flex items-center justify-between gap-2">
+        <h3 data-i18n="hours_h" class="text-xl font-bold"></h3>
+        <span data-pill></span>
+      </div>
+      <ul id="hours" class="mt-3 divide-y divide-slate-200"></ul>
+    </div>
+  </div>
+  <div class="card mt-6 overflow-hidden">
+    <iframe id="mapFrame" title="YET-CHANGE – Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen class="block h-80 w-full border-0 sm:h-96"></iframe>
+  </div>
+</section>
+
+<!-- ============ ALERTE MEILLEUR TAUX ============ -->
+<section class="mx-auto my-14 max-w-5xl px-4">
+  <div class="card grid gap-6 p-6 md:grid-cols-2 md:p-9">
+    <div>
+      <h2 data-i18n="al_h" class="text-3xl font-extrabold tracking-tight"></h2>
+      <p data-i18n="al_p" class="mt-2 text-slate-600"></p>
+    </div>
+    <form id="alertForm" class="grid gap-4 sm:grid-cols-2">
+      <label class="lbl"><span data-i18n="al_cur"></span><select id="alCur" class="field"></select></label>
+      <label class="lbl"><span data-i18n="al_op"></span><select id="alOp" class="field"></select></label>
+      <label class="lbl"><span data-i18n="al_target"></span>
+        <input id="alTarget" type="text" inputmode="decimal" required dir="ltr" placeholder="10,80" class="field tnum">
+        <span id="alNow" class="mt-1 block text-xs font-normal text-slate-500"></span></label>
+      <label class="lbl"><span data-i18n="al_name"></span><input id="alName" type="text" autocomplete="given-name" class="field"></label>
+      <button data-i18n="al_btn" type="submit" class="btn btn-mint sm:col-span-2"></button>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="bg-night py-8 text-center text-sm text-slate-400">
+  <p>© <span id="year"></span> YET-CHANGE, Rue d’Accra, Passage Karzazi, Hamria, Meknès.</p>
+  <p data-i18n="foot" class="mt-1"></p>
+</footer>
+
+<script>
+/* =====================================================================
+   1) API BANK AL-MAGHRIB : COLLEZ VOTRE URL ICI
+   ===================================================================== */
+const RATES_API_URL = "";   // <-- collez ici l’URL de l’API (laissez "" tant qu’elle n’est pas prête)
+
+/* Lecture de la réponse de l’API : adaptez UNIQUEMENT cette fonction à la structure réelle renvoyée.
+   Elle doit retourner : { updated_at: "2026-11-21T09:30:00+01:00", rates: { EUR: { achat: 10.55, vente: 10.75 }, USD: {...}, ... } }
+   achat = le bureau ACHÈTE la devise (le client reçoit des MAD) | vente = le bureau VEND la devise.
+   Si l’API ne fournit qu’un seul cours par devise, calculez ici achat et vente selon votre marge.
+   Si l’API exige une clé secrète, ne la placez pas dans ce fichier public : passez par un intermédiaire (ex. Cloudflare Worker). */
+function parseApiResponse(json) {
+  return { updated_at: json.updated_at, rates: json.rates };
+}
+
+/* Taux de secours (en MAD pour 1 unité) : affichés si l’URL est vide ou si l’API ne répond pas. Valeurs d’exemple, à remplacer par vos taux. */
+const MANUAL_UPDATED_AT = "2026-11-21T09:00:00+01:00";
+const MANUAL_RATES = {
+  EUR: { achat: 10.55, vente: 10.75 },
+  USD: { achat: 9.05,  vente: 9.25  },
+  GBP: { achat: 12.05, vente: 12.40 },
+  CAD: { achat: 6.55,  vente: 6.80  },
+  CHF: { achat: 11.20, vente: 11.55 },
+  SAR: { achat: 2.40,  vente: 2.50  },
+  AED: { achat: 2.45,  vente: 2.55  }
+};
+
+/* =====================================================================
+   2) INFOS DU BUREAU
+   ===================================================================== */
+const CONFIG = {
+  whatsapp: "212607744833",
+  rating: "5/5",
+  placeQuery: "Bureau de change YET-CHANGE Rue d'Accra Passage Karzazi Meknès",
+  dotationMAD: 100000
+};
+/* Horaires (fuseau Africa/Casablanca). 0 = dimanche ... 6 = samedi. [] = fermé. */
+const STD = [["10:00", "13:30"], ["15:15", "19:00"]];
+const HOURS = { 1: STD, 2: STD, 3: STD, 4: STD, 5: [["10:00", "13:00"], ["15:15", "19:00"]], 6: STD, 0: [] };
+
+/* =====================================================================
+   3) TEXTES FR / AR / EN
+   ===================================================================== */
+const I18N = {
+fr: { tagline: "Bureau de change, Meknès", rating: "{r} sur Google",
+  h1: "Votre bureau de change en plein centre-ville de Meknès",
+  lead: "Rue d’Accra, Passage Karzazi, Hamria : un accès facile, un passage rapide et discret, et un accueil immédiat, sans attente.",
+  c1: "Accès facile", c2: "Rapide et discret", c3: "Sans attente",
+  cta_gps: "Venir en agence (Itinéraire GPS)", cta_wa: "Contacter le guichet sur WhatsApp",
+  wa_main: "Bonjour YET-CHANGE Meknès, je souhaite connaître la disponibilité d’une devise avant de passer en agence.",
+  rates_h: "Cours du jour", rates_sub: "Pour 1 unité de devise, en dirhams marocains.",
+  updated: "Mis à jour le {d}", src_manual: "Taux de secours",
+  th_cur: "Devise", th_buy: "Nous achetons", th_sell: "Nous vendons",
+  legal: "0 % Commission — Taux indicatifs mis à jour quotidiennement. Présentation obligatoire de la CIN ou du Passeport au guichet (Office des Changes).",
+  dot_h: "Rappel : dotation Office des Changes", dot_p: "Pensez à la dotation de {n} MAD fixée par l’Office des Changes. Demandez-nous conseil avant votre opération.",
+  map_h: "Nous trouver", addr: "Adresse", addr_txt: "Rue d’Accra, Passage Karzazi, Hamria, Meknès", phone: "Téléphone fixe",
+  hours_h: "Horaires d’ouverture", days: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
+  open: "Ouvert", closed: "Fermé", closes: "fermeture à {t}", opens: "ouverture {w} à {t}", today: "aujourd’hui", tomorrow: "demain",
+  al_h: "Alerte meilleur taux", al_p: "Indiquez le taux visé : votre demande part par WhatsApp au guichet, qui vous prévient dès qu’il est atteint.",
+  al_cur: "Devise", al_op: "Opération", op_sell: "Je vends mes devises", op_buy: "J’achète des devises",
+  al_target: "Taux visé (MAD)", al_now: "Taux actuel : {r} MAD", al_name: "Prénom", al_btn: "Envoyer mon alerte sur WhatsApp",
+  al_msg: "Bonjour YET-CHANGE Meknès, Alerte Meilleur Taux : prévenez-moi quand le taux {c}/MAD ({o}) atteint {t}. Taux actuel : {r}. {n}",
+  foot: "Taux indicatifs : seul le taux confirmé au guichet fait foi." },
+ar: { tagline: "مكتب صرف العملات، مكناس", rating: "{r} على Google",
+  h1: "مكتب الصرف الخاص بكم في قلب مدينة مكناس",
+  lead: "زنقة أكرا، ممر كرزازي، الحمرية: وصول سهل، خدمة سريعة وسرية، واستقبال فوري بدون انتظار.",
+  c1: "وصول سهل", c2: "سريع وسري", c3: "بدون انتظار",
+  cta_gps: "الحضور إلى المكتب (مسار GPS)", cta_wa: "التواصل مع الشباك عبر واتساب",
+  wa_main: "السلام عليكم، أود معرفة مدى توفر إحدى العملات قبل المرور إلى المكتب. (YET-CHANGE مكناس)",
+  rates_h: "أسعار اليوم", rates_sub: "لكل وحدة من العملة، بالدرهم المغربي.",
+  updated: "آخر تحديث: {d}", src_manual: "أسعار احتياطية",
+  th_cur: "العملة", th_buy: "نشتري", th_sell: "نبيع",
+  legal: "0 % عمولة — أسعار إرشادية يتم تحديثها يوميا. الإدلاء ببطاقة التعريف الوطنية أو جواز السفر إلزامي عند الشباك (مكتب الصرف).",
+  dot_h: "تذكير: مخصص مكتب الصرف", dot_p: "تذكير بمخصص مكتب الصرف المحدد في {n} درهم. استشيرونا قبل إجراء العملية.",
+  map_h: "موقعنا", addr: "العنوان", addr_txt: "زنقة أكرا، ممر كرزازي، الحمرية، مكناس", phone: "الهاتف الثابت",
+  hours_h: "أوقات العمل", days: ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"],
+  open: "مفتوح", closed: "مغلق", closes: "يغلق على الساعة {t}", opens: "يفتح {w} على الساعة {t}", today: "اليوم", tomorrow: "غدا",
+  al_h: "تنبيه أفضل سعر", al_p: "حددوا السعر المطلوب: يصل طلبكم عبر واتساب إلى الشباك الذي يخبركم فور بلوغه.",
+  al_cur: "العملة", al_op: "العملية", op_sell: "أبيع عملاتي", op_buy: "أشتري عملات",
+  al_target: "السعر المطلوب (MAD)", al_now: "السعر الحالي: {r} MAD", al_name: "الاسم الشخصي", al_btn: "إرسال التنبيه عبر واتساب",
+  al_msg: "السلام عليكم، تنبيه أفضل سعر: أخبروني عندما يبلغ سعر {c}/MAD ({o}) القيمة {t}. السعر الحالي: {r}. {n}",
+  foot: "أسعار إرشادية: السعر المؤكد عند الشباك هو المعتمد." },
+en: { tagline: "Currency exchange, Meknes", rating: "{r} on Google",
+  h1: "Your currency exchange in the heart of downtown Meknes",
+  lead: "Rue d’Accra, Passage Karzazi, Hamria: easy access, a quick and discreet visit, and an immediate welcome with no waiting.",
+  c1: "Easy access", c2: "Quick and discreet", c3: "No waiting",
+  cta_gps: "Visit us (GPS directions)", cta_wa: "Contact the counter on WhatsApp",
+  wa_main: "Hello YET-CHANGE Meknès, I would like to check the availability of a currency before visiting the branch.",
+  rates_h: "Today’s rates", rates_sub: "For 1 unit of currency, in Moroccan dirhams.",
+  updated: "Updated {d}", src_manual: "Backup rates",
+  th_cur: "Currency", th_buy: "We buy", th_sell: "We sell",
+  legal: "0% commission. Indicative rates updated daily. National ID card (CIN) or passport required at the counter (Office des Changes).",
+  dot_h: "Reminder: Office des Changes allowance", dot_p: "Keep in mind the {n} MAD allowance set by the Office des Changes. Ask us before your transaction.",
+  map_h: "Find us", addr: "Address", addr_txt: "Rue d’Accra, Passage Karzazi, Hamria, Meknes", phone: "Landline",
+  hours_h: "Opening hours", days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+  open: "Open", closed: "Closed", closes: "closes at {t}", opens: "opens {w} at {t}", today: "today", tomorrow: "tomorrow",
+  al_h: "Best rate alert", al_p: "Enter the rate you want: your request goes to the counter by WhatsApp, and we let you know once it is reached.",
+  al_cur: "Currency", al_op: "Operation", op_sell: "I sell my currency", op_buy: "I buy currency",
+  al_target: "Target rate (MAD)", al_now: "Current rate: {r} MAD", al_name: "First name", al_btn: "Send my alert on WhatsApp",
+  al_msg: "Hello YET-CHANGE Meknès, Best Rate Alert: please tell me when the {c}/MAD rate ({o}) reaches {t}. Current rate: {r}. {n}",
+  foot: "Indicative rates: only the rate confirmed at the counter applies." }
+};
+
+/* =====================================================================
+   4) CODE (pas besoin d’y toucher)
+   ===================================================================== */
+const CURS = Object.keys(MANUAL_RATES);
+const FLAGS = { EUR: "🇪🇺", USD: "🇺🇸", GBP: "🇬🇧", CAD: "🇨🇦", CHF: "🇨🇭", SAR: "🇸🇦", AED: "🇦🇪" };
+const LOC = { fr: "fr-FR", en: "en-GB", ar: "ar-MA-u-nu-latn" }, NUM = { fr: "fr-FR", en: "en-GB", ar: "en-GB" };
+const $ = s => document.querySelector(s);
+const num = s => parseFloat(String(s).replace(/\s/g, "").replace(",", "."));
+let lang = "fr", state = { rates: MANUAL_RATES, updated_at: MANUAL_UPDATED_AT, live: false };
+try { const s = localStorage.getItem("yc-lang"); if (I18N[s]) lang = s; } catch (e) {}
+
+const T = (k, v = {}) => String(I18N[lang][k] ?? I18N.fr[k] ?? k).replace(/\{(\w+)\}/g, (_, x) => v[x] ?? "");
+const fmt = n => new Intl.NumberFormat(NUM[lang], { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
+const waLink = t => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(t)}`;
+const toMin = s => { const [h, m] = s.split(":"); return parseInt(h, 10) * 60 + parseInt(m, 10); };
+
+/* ---- Cours : chargement depuis le Worker, sinon taux de secours ---- */
+async function loadRates() {
+  if (!RATES_API_URL) return;
+  try {
+    const ctl = new AbortController(), to = setTimeout(() => ctl.abort(), 6000);
+    const res = await fetch(RATES_API_URL, { signal: ctl.signal, cache: "no-store" });
+    clearTimeout(to);
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const d = parseApiResponse(await res.json()), rates = {};
+    let ok = 0;
+    CURS.forEach(c => {
+      const x = d.rates && d.rates[c];
+      if (x && +x.achat > 0 && +x.vente > 0) { rates[c] = { achat: +x.achat, vente: +x.vente }; ok++; } else rates[c] = MANUAL_RATES[c];
+    });
+    if (!ok) throw new Error("Aucun taux valide");
+    state = { rates, updated_at: d.updated_at || new Date().toISOString(), live: true };
+    renderRates(); fillAlert();
+  } catch (e) { console.warn("Cours API indisponibles, taux de secours utilisés :", e.message); }
+}
+
+function renderRates() {
+  let names = null;
+  try { names = new Intl.DisplayNames([LOC[lang]], { type: "currency" }); } catch (e) {}
+  $("#rows").innerHTML = CURS.map(c => {
+    const r = state.rates[c], name = (names && names.of(c)) || c;
+    return `<tr class="border-t border-slate-100">
+      <td class="px-3 py-3 sm:px-6"><div class="flex items-center gap-2.5">
+        <span class="text-2xl leading-none" aria-hidden="true">${FLAGS[c]}</span>
+        <div class="leading-tight"><div class="font-bold">${c}</div><div class="hidden text-xs text-slate-500 sm:block">${name}</div></div></div></td>
+      <td class="tnum px-1 py-3 text-end text-base font-bold sm:px-3 sm:text-lg">${fmt(r.achat)}</td>
+      <td class="tnum px-1 py-3 text-end text-base font-bold text-emerald-700 sm:px-3 sm:text-lg">${fmt(r.vente)}</td>
+    </tr>`;
+  }).join("");
+  let d = "";
+  try {
+    const dt = new Date(state.updated_at);
+    if (!isNaN(dt)) d = new Intl.DateTimeFormat(LOC[lang], { dateStyle: "medium", timeStyle: "short", timeZone: "Africa/Casablanca" }).format(dt);
+  } catch (e) {}
+  $("#updated").textContent = d ? T("updated", { d }) : "";
+  $("#src").classList.toggle("hidden", state.live);
+}
+
+/* ---- Alerte meilleur taux (envoi par WhatsApp) ---- */
+function fillAlert() {
+  const c = $("#alCur").value || CURS[0], o = $("#alOp").value || "achat";
+  $("#alCur").innerHTML = CURS.map(x => `<option>${x}</option>`).join("");
+  $("#alOp").innerHTML = `<option value="achat">${T("op_sell")}</option><option value="vente">${T("op_buy")}</option>`;
+  $("#alCur").value = c; $("#alOp").value = o; alertHint();
+}
+function alertHint() { $("#alNow").textContent = T("al_now", { r: fmt(state.rates[$("#alCur").value][$("#alOp").value]) }); }
+$("#alCur").onchange = alertHint; $("#alOp").onchange = alertHint;
+$("#alertForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const c = $("#alCur").value, op = $("#alOp"), t = num($("#alTarget").value);
+  if (!(t > 0)) { $("#alTarget").focus(); return; }
+  const msg = T("al_msg", { c, o: op.options[op.selectedIndex].text, t: fmt(t), r: fmt(state.rates[c][op.value]), n: $("#alName").value.trim() }).trim();
+  window.open(waLink(msg), "_blank", "noopener");
+});
+
+/* ---- Statut Ouvert / Fermé (Africa/Casablanca) ---- */
+function nowMorocco() {
+  const p = new Intl.DateTimeFormat("en-GB", { timeZone: "Africa/Casablanca", weekday: "short", hour: "2-digit", minute: "2-digit", hour12: false }).formatToParts(new Date());
+  const g = t => p.find(x => x.type === t).value;
+  return { day: { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 }[g("weekday")], min: (parseInt(g("hour"), 10) % 24) * 60 + parseInt(g("minute"), 10) };
+}
+function getStatus() {
+  const { day, min } = nowMorocco(), days = I18N[lang].days;
+  for (const [o, c] of HOURS[day] || []) if (min >= toMin(o) && min < toMin(c)) return { open: true, sub: T("closes", { t: c }) };
+  for (let i = 0; i < 8; i++) {
+    const d = (day + i) % 7;
+    for (const [o] of HOURS[d] || []) if (i > 0 || toMin(o) > min) return { open: false, sub: T("opens", { w: i === 0 ? T("today") : i === 1 ? T("tomorrow") : days[d], t: o }) };
+  }
+  return { open: false, sub: "" };
+}
+function updateStatus() {
+  const s = getStatus(), today = nowMorocco().day, label = T(s.open ? "open" : "closed");
+  const cls = "items-center gap-2 rounded-full px-3 py-1 text-sm font-semibold ring-1 " + (s.open ? "bg-emerald-50 text-emerald-800 ring-emerald-200" : "bg-rose-50 text-rose-800 ring-rose-200");
+  const dot = `<span class="h-2 w-2 rounded-full ${s.open ? "animate-pulse bg-emerald-500" : "bg-rose-500"}"></span>`;
+  document.querySelectorAll("[data-pill]").forEach(el => { el.className = "inline-flex " + cls + (el.dataset.m ? " max-sm:hidden" : ""); el.innerHTML = dot + label; });
+  document.querySelectorAll("[data-pill-full]").forEach(el => { el.className = "inline-flex " + cls; el.innerHTML = dot + label + (s.sub ? " : " + s.sub : ""); });
+  $("#hours").innerHTML = [1, 2, 3, 4, 5, 6, 0].map(d => {
+    const slots = (HOURS[d] || []).map(x => x.join(" – ")).join("  /  ") || T("closed"), me = d === today;
+    return `<li class="flex justify-between gap-3 py-2.5 ${me ? "font-bold" : "text-slate-600"}"><span>${I18N[lang].days[d]}</span><span dir="ltr" class="tnum ${me ? "text-emerald-700" : ""}">${slots}</span></li>`;
+  }).join("");
+}
+
+/* ---- Langue ---- */
+function applyLang(l) {
+  lang = l;
+  try { localStorage.setItem("yc-lang", l); } catch (e) {}
+  const h = document.documentElement; h.lang = l; h.dir = l === "ar" ? "rtl" : "ltr";
+  document.querySelectorAll("[data-i18n]").forEach(el => el.textContent = T(el.dataset.i18n));
+  document.querySelectorAll("[data-wa]").forEach(a => a.href = waLink(T(a.dataset.wa)));
+  document.querySelectorAll("[data-lang]").forEach(b => {
+    const on = b.dataset.lang === l;
+    b.className = "rounded-md px-2.5 py-1 text-xs font-bold " + (on ? "bg-night text-white" : "text-slate-600 hover:bg-white");
+    b.setAttribute("aria-pressed", on);
+  });
+  $("#rating").textContent = T("rating", { r: CONFIG.rating });
+  $("#dotP").textContent = T("dot_p", { n: new Intl.NumberFormat(NUM[l]).format(CONFIG.dotationMAD) });
+  document.title = "YET-CHANGE – " + T("tagline");
+  renderRates(); fillAlert(); updateStatus();
+}
+document.querySelectorAll("[data-lang]").forEach(b => b.onclick = () => applyLang(b.dataset.lang));
+
+/* ---- Liens fixes et démarrage ---- */
+const place = encodeURIComponent(CONFIG.placeQuery);
+$("#gps").href = $("#gps2").href = "https://www.google.com/maps/dir/?api=1&destination=" + place;
+$("#mapFrame").src = "https://www.google.com/maps?q=" + place + "&output=embed";
+$("#year").textContent = new Date().getFullYear();
+applyLang(lang);
+setInterval(updateStatus, 30000);
+loadRates();
+</script>
+</body>
+</html>
