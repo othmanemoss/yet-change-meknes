@@ -169,20 +169,15 @@ tailwind.config = { theme: { extend: {
 
 <script>
 /* =====================================================================
-   1) API BANK AL-MAGHRIB : COLLEZ VOTRE URL ICI
+   1) VOS TAUX : GOOGLE SHEETS (publié en CSV)
+   Modifiez vos taux dans le tableau Google Sheets : le site les lit à chaque chargement de page.
+   Colonnes attendues : Devise, Achat, Vente (une ligne par devise : EUR, USD, GBP, CAD, CHF, SAR, AED).
+   Les décimales avec virgule (10,8085) sont acceptées.
+   Achat = le bureau ACHÈTE la devise (le client reçoit des MAD) | Vente = le bureau VEND la devise.
    ===================================================================== */
-const RATES_API_URL = "https://taux-bam.mossaddeqothmane.workers.dev";   // URL du Cloudflare Worker (laissez "" pour n’utiliser que les taux de secours)
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSXFGZCetwiZv-DYrv7qJD5BE2xNDN4mswHTNK_3CDVgYdt3KhhY1lo7NjGXvx7pNzlcRah0OtLh-b6/pub?gid=0&single=true&output=csv";
 
-/* Lecture de la réponse de l’API : adaptez UNIQUEMENT cette fonction à la structure réelle renvoyée.
-   Elle doit retourner : { updated_at: "2026-11-21T09:30:00+01:00", rates: { EUR: { achat: 10.55, vente: 10.75 }, USD: {...}, ... } }
-   achat = le bureau ACHÈTE la devise (le client reçoit des MAD) | vente = le bureau VEND la devise.
-   Si l’API ne fournit qu’un seul cours par devise, calculez ici achat et vente selon votre marge.
-   Si l’API exige une clé secrète, ne la placez pas dans ce fichier public : passez par un intermédiaire (ex. Cloudflare Worker). */
-function parseApiResponse(json) {
-  return { updated_at: json.updated_at, rates: json.rates };
-}
-
-/* Taux de secours (en MAD pour 1 unité) : affichés si l’URL est vide ou si l’API ne répond pas. Valeurs d’exemple, à remplacer par vos taux. */
+/* Taux de secours (en MAD pour 1 unité) : affichés uniquement si le tableau Google Sheets est inaccessible (réseau coupé, tableau illisible). Valeurs d’exemple, à remplacer par vos taux. */
 const MANUAL_UPDATED_AT = "2026-11-21T09:00:00+01:00";
 const MANUAL_RATES = {
   EUR: { achat: 10.55, vente: 10.75 },
@@ -278,45 +273,63 @@ const FLAGS = { EUR: "🇪🇺", USD: "🇺🇸", GBP: "🇬🇧", CAD: "🇨�
 const LOC = { fr: "fr-FR", en: "en-GB", ar: "ar-MA-u-nu-latn" }, NUM = { fr: "fr-FR", en: "en-GB", ar: "en-GB" };
 const $ = s => document.querySelector(s);
 const num = s => parseFloat(String(s).replace(/\s/g, "").replace(",", "."));
-let lang = "fr", state = { rates: MANUAL_RATES, updated_at: MANUAL_UPDATED_AT, live: false };
+let lang = "fr", state = { rates: MANUAL_RATES, updated_at: MANUAL_UPDATED_AT, live: false, loading: true };
 try { const s = localStorage.getItem("yc-lang"); if (I18N[s]) lang = s; } catch (e) {}
 
 const T = (k, v = {}) => String(I18N[lang][k] ?? I18N.fr[k] ?? k).replace(/\{(\w+)\}/g, (_, x) => v[x] ?? "");
-const fmt = n => new Intl.NumberFormat(NUM[lang], { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
+const fmt = n => new Intl.NumberFormat(NUM[lang], { minimumFractionDigits: 2, maximumFractionDigits: 4 }).format(n);
 const waLink = t => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(t)}`;
 const toMin = s => { const [h, m] = s.split(":"); return parseInt(h, 10) * 60 + parseInt(m, 10); };
 
-/* ---- Cours : chargement depuis le Worker, sinon taux de secours ---- */
+/* ---- Cours : lecture du CSV Google Sheets, sinon taux de secours ---- */
+function parseCSV(text) {   // gère les guillemets, les virgules dans les champs et les fins de ligne Windows
+  const rows = []; let row = [], cell = "", q = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (q) { if (ch === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else q = false; } else cell += ch; }
+    else if (ch === '"') q = true;
+    else if (ch === ",") { row.push(cell); cell = ""; }
+    else if (ch === "\n" || ch === "\r") { if (ch === "\r" && text[i + 1] === "\n") i++; row.push(cell); rows.push(row); row = []; cell = ""; }
+    else cell += ch;
+  }
+  if (cell !== "" || row.length) { row.push(cell); rows.push(row); }
+  return rows;
+}
+const toNum = v => parseFloat(String(v).trim().replace(/\s/g, "").replace(",", "."));
+
 async function loadRates() {
-  if (!RATES_API_URL) return;
   try {
-    const ctl = new AbortController(), to = setTimeout(() => ctl.abort(), 6000);
-    const res = await fetch(RATES_API_URL, { signal: ctl.signal, cache: "no-store" });
+    const ctl = new AbortController(), to = setTimeout(() => ctl.abort(), 8000);
+    const res = await fetch(SHEET_CSV_URL, { signal: ctl.signal, cache: "no-store" });
     clearTimeout(to);
     if (!res.ok) throw new Error("HTTP " + res.status);
-    const d = parseApiResponse(await res.json()), rates = {};
-    let ok = 0;
-    CURS.forEach(c => {
-      const x = d.rates && d.rates[c];
-      if (x && +x.achat > 0 && +x.vente > 0) { rates[c] = { achat: +x.achat, vente: +x.vente }; ok++; } else rates[c] = MANUAL_RATES[c];
+    const rows = parseCSV((await res.text()).replace(/^\uFEFF/, ""));
+    const head = (rows[0] || []).map(h => h.trim().toLowerCase());
+    const col = (n, d) => head.indexOf(n) >= 0 ? head.indexOf(n) : d;
+    const iD = col("devise", 0), iA = col("achat", 1), iV = col("vente", 2);
+    const found = {};
+    (head.includes("devise") ? rows.slice(1) : rows).forEach(r => {
+      const c = (r[iD] || "").trim().toUpperCase(), a = toNum(r[iA]), v = toNum(r[iV]);
+      if (CURS.includes(c) && a > 0 && v > 0) found[c] = { achat: a, vente: v };
     });
-    if (!ok) throw new Error("Aucun taux valide");
-    state = { rates, updated_at: d.updated_at || new Date().toISOString(), live: true };
-    renderRates(); fillAlert();
-  } catch (e) { console.warn("Cours API indisponibles, taux de secours utilisés :", e.message); }
+    if (!Object.keys(found).length) throw new Error("Aucun taux lisible dans le tableau");
+    const rates = {}; CURS.forEach(c => rates[c] = found[c] || null);
+    state = { rates, updated_at: new Date().toISOString(), live: true, loading: false };   // heure actuelle (Maroc à l’affichage)
+  } catch (e) { console.warn("Tableau Google Sheets inaccessible, taux de secours utilisés :", e.message); }
+  finally { state.loading = false; renderRates(); fillAlert(); }
 }
 
 function renderRates() {
   let names = null;
   try { names = new Intl.DisplayNames([LOC[lang]], { type: "currency" }); } catch (e) {}
   $("#rows").innerHTML = CURS.map(c => {
-    const r = state.rates[c], name = (names && names.of(c)) || c;
+    const r = state.loading ? null : state.rates[c], name = (names && names.of(c)) || c, none = state.loading ? "…" : "—";
     return `<tr class="border-t border-slate-100">
       <td class="px-3 py-3 sm:px-6"><div class="flex items-center gap-2.5">
         <span class="text-2xl leading-none" aria-hidden="true">${FLAGS[c]}</span>
         <div class="leading-tight"><div class="font-bold">${c}</div><div class="hidden text-xs text-slate-500 sm:block">${name}</div></div></div></td>
-      <td class="tnum px-1 py-3 text-end text-base font-bold sm:px-3 sm:text-lg">${fmt(r.achat)}</td>
-      <td class="tnum px-1 py-3 text-end text-base font-bold text-emerald-700 sm:px-3 sm:text-lg">${fmt(r.vente)}</td>
+      <td class="tnum px-1 py-3 text-end text-base font-bold sm:px-3 sm:text-lg">${r ? fmt(r.achat) : none}</td>
+      <td class="tnum px-1 py-3 text-end text-base font-bold text-emerald-700 sm:px-3 sm:text-lg">${r ? fmt(r.vente) : none}</td>
     </tr>`;
   }).join("");
   let d = "";
@@ -324,8 +337,8 @@ function renderRates() {
     const dt = new Date(state.updated_at);
     if (!isNaN(dt)) d = new Intl.DateTimeFormat(LOC[lang], { dateStyle: "medium", timeStyle: "short", timeZone: "Africa/Casablanca" }).format(dt);
   } catch (e) {}
-  $("#updated").textContent = d ? T("updated", { d }) : "";
-  $("#src").classList.toggle("hidden", state.live);
+  $("#updated").textContent = d && !state.loading ? T("updated", { d }) : "";
+  $("#src").classList.toggle("hidden", state.live || state.loading);
 }
 
 /* ---- Alerte meilleur taux (envoi par WhatsApp) ---- */
@@ -335,13 +348,13 @@ function fillAlert() {
   $("#alOp").innerHTML = `<option value="achat">${T("op_sell")}</option><option value="vente">${T("op_buy")}</option>`;
   $("#alCur").value = c; $("#alOp").value = o; alertHint();
 }
-function alertHint() { $("#alNow").textContent = T("al_now", { r: fmt(state.rates[$("#alCur").value][$("#alOp").value]) }); }
+function alertHint() { const x = !state.loading && state.rates[$("#alCur").value]; $("#alNow").textContent = x ? T("al_now", { r: fmt(x[$("#alOp").value]) }) : ""; }
 $("#alCur").onchange = alertHint; $("#alOp").onchange = alertHint;
 $("#alertForm").addEventListener("submit", e => {
   e.preventDefault();
   const c = $("#alCur").value, op = $("#alOp"), t = num($("#alTarget").value);
   if (!(t > 0)) { $("#alTarget").focus(); return; }
-  const msg = T("al_msg", { c, o: op.options[op.selectedIndex].text, t: fmt(t), r: fmt(state.rates[c][op.value]), n: $("#alName").value.trim() }).trim();
+  const msg = T("al_msg", { c, o: op.options[op.selectedIndex].text, t: fmt(t), r: state.loading || !state.rates[c] ? "—" : fmt(state.rates[c][op.value]), n: $("#alName").value.trim() }).trim();
   window.open(waLink(msg), "_blank", "noopener");
 });
 
