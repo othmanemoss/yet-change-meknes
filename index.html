@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#060d0a">
+<meta name="theme-color" content="#030826">
 <title>YET-CHANGE Meknès – Bureau de change, Hamria</title>
 <meta name="description" content="YET-CHANGE, bureau de change à Hamria, Meknès (Rue d’Accra, Passage Karzazi). Taux du jour EUR, USD, GBP, CAD, CHF, SAR, AED, simulateur et blocage de taux 2h.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,29 +18,31 @@ tailwind.config = { theme: { extend: { fontFamily: {
 <style>
   [hidden] { display: none !important; }
   html { scroll-behavior: smooth; }
-  body { background: #060d0a radial-gradient(70% 38% at 85% 0%, rgba(16,185,129,.16), transparent) no-repeat fixed; color: #ecfdf5; min-height: 100vh; }
+  body { color: #fff; min-height: 100vh; background-color: #030826;
+    background-image: radial-gradient(90% 55% at 70% 0%, #07134d 0%, rgba(7,19,77,0) 70%), linear-gradient(180deg, #030826 0%, #07134d 100%); background-attachment: fixed; }
   .tnum { font-variant-numeric: tabular-nums; }
-  #fx { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: .06; }
+  #fx { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: .14; }
 
-  /* Verre dépoli sombre, bordure dorée, ombres multicouches */
-  .glass { position: relative; overflow: hidden; border-radius: 1.25rem; border: 1px solid rgba(212,175,55,.25);
-    background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.02)); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 2px 4px rgba(0,0,0,.4), 0 14px 30px -12px rgba(0,0,0,.7), 0 30px 60px -34px rgba(16,185,129,.3); }
-  .sheen::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, transparent 38%, rgba(212,175,55,.18) 50%, transparent 62%); transform: translateX(-130%); transition: transform .9s cubic-bezier(.22,1,.36,1); }
+  /* Verre dépoli bleu nuit, bordure Or Satiné, ombres multicouches */
+  .glass { position: relative; overflow: hidden; border-radius: 1.25rem; border: 1px solid rgba(242,201,76,.3);
+    background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,0)), rgba(7,19,77,.55); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 2px 4px rgba(0,0,0,.4), 0 14px 30px -12px rgba(0,0,0,.7), 0 30px 60px -34px rgba(242,201,76,.22); }
+  .soft { background: rgba(3,8,38,.62); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-radius: .8rem; padding: .55rem .8rem; }
+  .sheen::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, transparent 38%, rgba(242,201,76,.2) 50%, transparent 62%); transform: translateX(-130%); transition: transform .9s cubic-bezier(.22,1,.36,1); }
   .sheen:hover::after, .sheen:active::after { transform: translateX(130%); }
 
-  .tab { padding: .5rem .15rem; border-radius: .8rem; font-size: .72rem; font-weight: 700; line-height: 1.15; text-align: center; color: #9db8ac; transition: background .3s, color .3s, box-shadow .3s; }
-  .tab[aria-selected=true] { color: #fff; background: linear-gradient(180deg, rgba(16,185,129,.24), rgba(16,185,129,.05)); box-shadow: inset 0 -2px 0 #D4AF37; }
-  .seg { display: inline-flex; padding: 2px; border-radius: .7rem; background: rgba(255,255,255,.07); }
-  .seg button { padding: .38rem .7rem; border-radius: .55rem; font-size: .8rem; font-weight: 700; color: #9db8ac; transition: background .25s, color .25s; }
-  .seg button[aria-pressed=true] { background: #10B981; color: #04130c; }
-  .field { width: 100%; padding: .7rem .8rem; border-radius: .75rem; font-weight: 600; color: #ecfdf5; background: rgba(255,255,255,.06); border: 1px solid rgba(212,175,55,.25); }
-  .field:focus { outline: 2px solid #10B981; outline-offset: 1px; }
-  select.field option { background: #0b1612; }
-  .lbl { font-size: .75rem; font-weight: 600; color: #9db8ac; }
+  .tab { padding: .5rem .15rem; border-radius: .8rem; font-size: .72rem; font-weight: 700; line-height: 1.15; text-align: center; color: #b4bee0; transition: background .3s, color .3s, box-shadow .3s; }
+  .tab[aria-selected=true] { color: #F2C94C; background: linear-gradient(180deg, rgba(242,201,76,.2), rgba(242,201,76,.04)); box-shadow: inset 0 -2px 0 #F2C94C; }
+  .seg { display: inline-flex; padding: 2px; border-radius: .7rem; background: rgba(255,255,255,.08); }
+  .seg button { padding: .38rem .7rem; border-radius: .55rem; font-size: .8rem; font-weight: 700; color: #b4bee0; transition: background .25s, color .25s; }
+  .seg button[aria-pressed=true] { background: #F2C94C; color: #030826; }
+  .field { width: 100%; padding: .7rem .8rem; border-radius: .75rem; font-weight: 600; color: #fff; background: rgba(255,255,255,.07); border: 1px solid rgba(242,201,76,.3); }
+  .field:focus { outline: 2px solid #F2C94C; outline-offset: 1px; }
+  select.field option { background: #07134d; }
+  .lbl { font-size: .75rem; font-weight: 600; color: #b4bee0; }
 
   /* Boutons asymétriques, balayage fluide + inversion des coins */
-  .btn { --big: 1.4rem; --small: .35rem; --sweep: #D4AF37; --fg-h: #060d0a; position: relative; isolation: isolate; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; padding: .85rem 1.4rem; font-weight: 800; text-align: center; line-height: 1.25;
+  .btn { --big: 1.4rem; --small: .35rem; --sweep: #fff; --fg-h: #030826; position: relative; isolation: isolate; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; padding: .85rem 1.4rem; font-weight: 800; text-align: center; line-height: 1.25;
     border-start-start-radius: var(--big); border-end-end-radius: var(--big); border-start-end-radius: var(--small); border-end-start-radius: var(--small);
     transition: border-radius .55s cubic-bezier(.22,1,.36,1), transform .25s cubic-bezier(.22,1,.36,1), color .35s; }
   .btn::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--sweep); transform: scaleX(0); transform-origin: left center; transition: transform .55s cubic-bezier(.22,1,.36,1); }
@@ -48,13 +50,14 @@ tailwind.config = { theme: { extend: { fontFamily: {
   .btn:hover, .btn:focus-visible { color: var(--fg-h); border-start-start-radius: var(--small); border-end-end-radius: var(--small); border-start-end-radius: var(--big); border-end-start-radius: var(--big); }
   .btn:hover::before, .btn:focus-visible::before { transform: scaleX(1); }
   .btn:active { transform: scale(.96); }
-  .btn:focus-visible { outline: 2px solid #D4AF37; outline-offset: 3px; }
-  .btn-gold { background: #10B981; color: #04130c; }
-  .btn-ghost { color: #ecfdf5; box-shadow: inset 0 0 0 1.5px rgba(212,175,55,.5); }
+  .btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+  .btn-gold { background: #F2C94C; color: #030826; }
+  .btn-ghost { color: #fff; box-shadow: inset 0 0 0 1.5px rgba(242,201,76,.55); --sweep: #F2C94C; --fg-h: #030826; }
   .btn-sm { --big: .9rem; padding: .42rem .65rem; font-size: .72rem; }
 
   .pulse { transform-box: fill-box; transform-origin: center; animation: pulse 1.8s ease-out infinite; }
   @keyframes pulse { 0% { transform: scale(.6); opacity: .7; } 100% { transform: scale(2.2); opacity: 0; } }
+  @media (min-width: 768px) { .tab { font-size: .9rem; padding: .65rem .5rem; } }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .pulse, .animate-pulse { animation: none; } .btn, .btn::before, .sheen::after { transition: none; } }
 </style>
 </head>
@@ -62,14 +65,14 @@ tailwind.config = { theme: { extend: { fontFamily: {
 <body class="font-sans antialiased">
 <canvas id="fx" aria-hidden="true"></canvas>
 
-<div class="relative z-10 mx-auto max-w-xl px-3 pb-10 md:max-w-2xl">
+<div class="relative z-10 mx-auto max-w-xl px-3 pb-10 md:max-w-6xl md:px-6">
 
   <!-- EN-TÊTE COMPACT + ONGLETS -->
-  <div class="sticky top-0 z-30 -mx-3 border-b border-[#D4AF37]/20 bg-[#060d0a]/85 px-3 backdrop-blur">
+  <div class="sticky top-0 z-30 -mx-3 border-b border-[#F2C94C]/25 bg-[#030826]/85 px-3 backdrop-blur md:-mx-6 md:px-6">
     <div class="flex items-center justify-between gap-2 py-2.5">
       <div class="flex items-center gap-2.5">
-        <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg font-mono text-lg font-bold text-[#060d0a]" style="background:linear-gradient(135deg,#D4AF37,#10B981)">Y</span>
-        <div class="leading-tight"><b class="block tracking-tight">YET-CHANGE</b><span data-i18n="tag" class="block text-[11px] text-emerald-100/60"></span></div>
+        <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg font-mono text-lg font-bold text-[#030826]" style="background:linear-gradient(135deg,#F2C94C,#E0B53A)">Y</span>
+        <div class="leading-tight"><b class="block tracking-tight">YET-CHANGE</b><span data-i18n="tag" class="block text-[11px] text-white/60"></span></div>
       </div>
       <div class="flex items-center gap-2">
         <div class="seg" role="group" aria-label="Langue"><button data-lang="fr" type="button">FR</button><button data-lang="ar" type="button">AR</button><button data-lang="en" type="button">EN</button></div>
@@ -86,86 +89,98 @@ tailwind.config = { theme: { extend: { fontFamily: {
 
   <main class="mt-4">
 
-    <!-- ONGLET 1 : TAUX & SIMULATEUR -->
-    <section data-panel="1" role="tabpanel" class="space-y-4">
-      <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-emerald-100/70">
+    <!-- ONGLET 1 : TAUX & SIMULATEUR (PC : tableau 7 colonnes + simulateur 5 colonnes) -->
+    <section data-panel="1" role="tabpanel" class="space-y-4 lg:grid lg:grid-cols-12 lg:gap-6 lg:space-y-0">
+      <div class="soft flex flex-wrap items-center justify-between gap-2 text-xs text-white/70 lg:col-span-12">
         <span data-pill></span>
         <span><span id="updated" class="font-mono"></span><span id="src" data-i18n="src" class="ms-2 hidden rounded bg-amber-400/15 px-2 py-0.5 text-amber-200 ring-1 ring-amber-300/30"></span></span>
       </div>
 
-      <div class="glass sheen">
-        <table class="w-full text-start">
-          <thead class="text-xs text-emerald-100/60"><tr>
-            <th data-i18n="th_cur" class="py-2.5 ps-3 text-start font-semibold"></th>
-            <th data-i18n="th_buy" class="px-2 py-2.5 text-end font-semibold"></th>
-            <th data-i18n="th_sell" class="px-2 py-2.5 text-end font-semibold"></th>
-            <th class="pe-3"></th></tr></thead>
-          <tbody id="rows"></tbody>
-        </table>
+      <div class="space-y-4 lg:col-span-7">
+        <div class="glass sheen">
+          <table class="w-full text-start">
+            <thead class="text-xs text-white/60"><tr>
+              <th data-i18n="th_cur" class="py-2.5 ps-3 text-start font-semibold"></th>
+              <th data-i18n="th_buy" class="px-2 py-2.5 text-end font-semibold"></th>
+              <th data-i18n="th_sell" class="px-2 py-2.5 text-end font-semibold"></th>
+              <th class="pe-3"></th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <p data-i18n="reassure" class="rounded-xl border border-[#F2C94C]/25 bg-[#030826]/60 px-4 py-3 text-sm leading-relaxed text-white/90 backdrop-blur"></p>
+        <p data-i18n="legend" class="soft text-xs text-white/60"></p>
       </div>
-      <p data-i18n="reassure" class="rounded-xl border border-emerald-400/20 bg-emerald-400/5 px-4 py-3 text-sm leading-relaxed text-emerald-50/90"></p>
-      <p data-i18n="legend" class="px-1 text-xs text-emerald-100/50"></p>
 
-      <div id="sim" class="glass scroll-mt-32 space-y-4 p-4 sm:p-5">
-        <h2 data-i18n="sim_h" class="text-lg font-extrabold"></h2>
-        <div class="seg w-full"><button id="dBuy" data-i18n="dir_buy" type="button" class="flex-1"></button><button id="dSell" data-i18n="dir_sell" type="button" class="flex-1"></button></div>
-        <div class="grid grid-cols-5 items-end gap-3">
-          <label class="lbl col-span-2"><span data-i18n="cur"></span><select id="simCur" class="field mt-1 font-mono"></select></label>
-          <div class="lbl col-span-3"><span data-i18n="amt_in"></span><div class="seg mt-1 flex"><button id="uDev" type="button" class="flex-1 font-mono"></button><button id="uMad" type="button" class="flex-1 font-mono">MAD</button></div></div>
+      <div class="lg:col-span-5"><div class="lg:sticky lg:top-36">
+        <div id="sim" class="glass scroll-mt-32 space-y-4 p-4 sm:p-5">
+          <h2 data-i18n="sim_h" class="text-lg font-extrabold text-[#F2C94C]"></h2>
+          <div class="seg w-full"><button id="dBuy" data-i18n="dir_buy" type="button" class="flex-1"></button><button id="dSell" data-i18n="dir_sell" type="button" class="flex-1"></button></div>
+          <div class="grid grid-cols-5 items-end gap-3">
+            <label class="lbl col-span-2"><span data-i18n="cur"></span><select id="simCur" class="field mt-1 font-mono"></select></label>
+            <div class="lbl col-span-3"><span data-i18n="amt_in"></span><div class="seg mt-1 flex"><button id="uDev" type="button" class="flex-1 font-mono"></button><button id="uMad" type="button" class="flex-1 font-mono">MAD</button></div></div>
+          </div>
+          <input id="simAmt" type="text" inputmode="decimal" value="1000" dir="ltr" aria-label="Montant" class="field font-mono text-2xl tnum">
+          <div class="rounded-2xl bg-[#030826]/60 p-4 ring-1 ring-[#F2C94C]/25">
+            <p id="simLab" class="text-sm text-white/70"></p>
+            <p class="mt-1 font-mono text-3xl font-bold text-[#F2C94C] tnum sm:text-4xl"><span id="simOut">0</span> <span id="simUnit" class="text-lg text-white"></span></p>
+            <p id="simRate" class="mt-2 font-mono text-xs text-white/60"></p>
+          </div>
+          <p id="big" hidden data-i18n="big" class="rounded-xl p-3 text-sm font-semibold leading-relaxed text-[#030826]" style="background:linear-gradient(135deg,#F2C94C,#E0B53A)"></p>
+          <a id="lock" data-i18n="lock_btn" href="#" target="_blank" rel="noopener" class="btn btn-gold w-full"></a>
         </div>
-        <input id="simAmt" type="text" inputmode="decimal" value="1000" dir="ltr" aria-label="Montant" class="field font-mono text-2xl tnum">
-        <div class="rounded-2xl bg-black/30 p-4 ring-1 ring-[#D4AF37]/20">
-          <p id="simLab" class="text-sm text-emerald-100/70"></p>
-          <p class="mt-1 font-mono text-3xl font-bold text-emerald-300 tnum sm:text-4xl"><span id="simOut">0</span> <span id="simUnit" class="text-lg text-[#D4AF37]"></span></p>
-          <p id="simRate" class="mt-2 font-mono text-xs text-emerald-100/60"></p>
-        </div>
-        <p id="big" hidden data-i18n="big" class="rounded-xl p-3 text-sm font-semibold leading-relaxed text-[#1a1405]" style="background:linear-gradient(135deg,#f3d77a,#D4AF37)"></p>
-        <a id="lock" data-i18n="lock_btn" href="#" target="_blank" rel="noopener" class="btn btn-gold w-full"></a>
-      </div>
+      </div></div>
     </section>
 
-    <!-- ONGLET 2 : COURBE 3 MOIS -->
-    <section data-panel="2" role="tabpanel" class="space-y-4" hidden>
-      <div class="flex items-end justify-between gap-3">
-        <h2 data-i18n="ch_h" class="text-lg font-extrabold leading-tight"></h2>
-        <select id="chCur" class="field w-28 font-mono" aria-label="Devise"></select>
+    <!-- ONGLET 2 : COURBE (graphique interactif) -->
+    <section data-panel="2" role="tabpanel" class="space-y-4 lg:grid lg:grid-cols-12 lg:gap-6 lg:space-y-0" hidden>
+      <div class="space-y-3 lg:col-span-12 lg:flex lg:items-end lg:justify-between lg:space-y-0">
+        <h2 data-i18n="ch_h" class="text-lg font-extrabold leading-tight text-[#F2C94C]"></h2>
+        <div class="flex items-center gap-2">
+          <select id="chCur" class="field w-28 font-mono" aria-label="Devise"></select>
+          <div class="seg" role="group" aria-label="Période"><button type="button" data-per="30" class="font-mono">1M</button><button type="button" data-per="60" class="font-mono">2M</button><button type="button" data-per="90" class="font-mono">3M</button></div>
+        </div>
       </div>
-      <div class="glass p-3">
+      <div class="glass p-3 lg:col-span-8">
+        <div id="chTip" hidden class="mb-2 min-h-[2.75rem] rounded-xl bg-[#030826]/60 px-3 py-2 font-mono text-sm leading-relaxed"></div>
         <p id="chDemo" hidden data-i18n="ch_demo" class="mb-2 rounded-lg bg-amber-400/10 px-3 py-1.5 text-xs text-amber-200 ring-1 ring-amber-300/25"></p>
         <div id="chart" dir="ltr"></div>
       </div>
-      <div class="grid grid-cols-3 gap-2 text-center">
-        <div class="glass p-3"><p data-i18n="low" class="text-[11px] text-emerald-100/60"></p><p id="stLow" class="mt-1 font-mono text-sm font-bold tnum sm:text-base"></p></div>
-        <div class="glass p-3 ring-1 ring-[#D4AF37]/40"><p data-i18n="st_today" class="text-[11px] text-emerald-100/60"></p><p id="stNow" class="mt-1 font-mono text-sm font-bold text-emerald-300 tnum sm:text-base"></p></div>
-        <div class="glass p-3"><p data-i18n="high" class="text-[11px] text-emerald-100/60"></p><p id="stHigh" class="mt-1 font-mono text-sm font-bold tnum sm:text-base"></p></div>
-      </div>
-      <a id="lockDay" data-i18n="lock_day" href="#" target="_blank" rel="noopener" class="btn btn-gold w-full"></a>
-    </section>
-
-    <!-- ONGLET 3 : VOTRE PROJET -->
-    <section data-panel="3" role="tabpanel" class="space-y-4" hidden>
-      <h2 data-i18n="proj_h" class="text-lg font-extrabold"></h2>
-      <div id="proj" class="grid gap-3 sm:grid-cols-2"></div>
-    </section>
-
-    <!-- ONGLET 4 : ACCÈS & GPS -->
-    <section data-panel="4" role="tabpanel" class="space-y-4" hidden>
-      <div class="glass p-1.5">
-        <iframe id="mapFrame" title="YET-CHANGE – Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen class="block h-80 w-full rounded-2xl border-0 sm:h-[26rem]"></iframe>
-      </div>
-      <a id="gps" data-i18n="gps_start" href="#" target="_blank" rel="noopener" class="btn btn-gold w-full py-4 text-base"></a>
-      <div class="glass space-y-4 p-4 sm:p-5">
-        <div><p data-i18n="addr_h" class="lbl"></p><p class="mt-1 font-semibold">YET-CHANGE<br><span data-i18n="addr" class="font-normal text-emerald-100/85"></span></p></div>
-        <div>
-          <div class="flex flex-wrap items-center justify-between gap-2"><h3 data-i18n="hours_h" class="font-bold"></h3><span data-pill></span></div>
-          <ul id="hours" class="mt-2 divide-y divide-white/10 text-sm"></ul>
+      <div class="space-y-4 lg:col-span-4">
+        <div class="grid grid-cols-3 gap-2 text-center lg:grid-cols-1">
+          <div class="glass p-3"><p id="lowL" class="text-[11px] text-white/60"></p><p id="stLow" class="mt-1 font-mono text-sm font-bold tnum sm:text-base"></p></div>
+          <div class="glass p-3 ring-1 ring-[#F2C94C]/40"><p data-i18n="st_today" class="text-[11px] text-white/60"></p><p id="stNow" class="mt-1 font-mono text-sm font-bold text-[#F2C94C] tnum sm:text-base"></p></div>
+          <div class="glass p-3"><p id="highL" class="text-[11px] text-white/60"></p><p id="stHigh" class="mt-1 font-mono text-sm font-bold tnum sm:text-base"></p></div>
         </div>
-        <a href="tel:+212535510040" dir="ltr" class="btn btn-ghost w-full font-mono">+212 5 35 51 00 40</a>
+        <a id="lockDay" data-i18n="lock_day" href="#" target="_blank" rel="noopener" class="btn btn-gold w-full"></a>
+      </div>
+    </section>
+
+    <!-- ONGLET 3 : VOTRE PROJET (PC : 3 colonnes) -->
+    <section data-panel="3" role="tabpanel" class="space-y-4" hidden>
+      <h2 data-i18n="proj_h" class="text-lg font-extrabold text-[#F2C94C]"></h2>
+      <div id="proj" class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3"></div>
+    </section>
+
+    <!-- ONGLET 4 : ACCÈS & GPS (PC : carte 7 colonnes + infos 5 colonnes) -->
+    <section data-panel="4" role="tabpanel" class="space-y-4 lg:grid lg:grid-cols-12 lg:gap-6 lg:space-y-0" hidden>
+      <div class="glass p-1.5 lg:col-span-7">
+        <iframe id="mapFrame" title="YET-CHANGE – Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen class="block h-80 w-full rounded-2xl border-0 sm:h-[26rem] lg:h-[34rem]"></iframe>
+      </div>
+      <div class="space-y-4 lg:col-span-5">
+        <a id="gps" data-i18n="gps_start" href="#" target="_blank" rel="noopener" class="btn btn-gold w-full py-4 text-base"></a>
+        <div class="glass space-y-4 p-4 sm:p-5">
+          <div><p data-i18n="addr_h" class="lbl"></p><p class="mt-1 font-semibold">YET-CHANGE<br><span data-i18n="addr" class="font-normal text-white/85"></span></p></div>
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-2"><h3 data-i18n="hours_h" class="font-bold text-[#F2C94C]"></h3><span data-pill></span></div>
+            <ul id="hours" class="mt-2 divide-y divide-white/10 text-sm"></ul>
+          </div>
+          <a href="tel:+212535510040" dir="ltr" class="btn btn-ghost w-full font-mono">+212 5 35 51 00 40</a>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="mt-8 space-y-2 text-center text-xs text-emerald-100/50">
+  <footer class="soft mt-8 space-y-2 text-center text-xs text-white/60">
     <p data-i18n="legal"></p>
     <p dir="ltr">© <span id="year"></span> YET-CHANGE, Hamria, Meknès. WhatsApp +212 7 06 74 48 33</p>
   </footer>
@@ -181,7 +196,7 @@ const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSXFGZCet
 /* OPTIONNEL : historique réel pour l’onglet « Courbe 3 mois ».
    Collez ici le lien CSV publié d’un onglet avec les colonnes : Date (AAAA-MM-JJ), Devise, Vente (une ligne par jour et par devise).
    Tant que ce champ est vide, la courbe est une ILLUSTRATION signalée comme telle et plus bas / plus haut restent à « — ». */
-const HISTORY_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSXFGZCetwiZv-DYrv7qJD5BE2xNDN4mswHTNK_3CDVgYdt3KhhY1lo7NjGXvx7pNzlcRah0OtLh-b6/pub?gid=868313948&single=true&output=csv";
+const HISTORY_CSV_URL = "";
 
 /* Taux de secours (MAD pour 1 unité) : affichés uniquement si le réseau est coupé ou le tableau illisible. Valeurs d’exemple. */
 const MANUAL_UPDATED_AT = "2026-11-21T09:00:00+01:00";
@@ -218,7 +233,7 @@ fr: { tag: "Agréé Office des Changes", tab1: "Taux & Simulateur", tab2: "Courb
   big: "Opération volume important : passez directement au guichet YET-CHANGE (Hamria) ou signalez votre montant sur WhatsApp pour préparer votre enveloppe en salon discret.",
   lock_btn: "Bloquer ce taux gratuitement pendant 2h (WhatsApp)",
   lock_msg: "Salam YET-CHANGE, je veux bloquer {a} {c} au taux affiché de {r} ({k}). Je passe à l’agence Hamria d’ici 2h.",
-  ch_h: "Courbe sur 3 mois : taux de vente", ch_demo: "Courbe illustrative : historique réel non connecté.", low: "Plus bas (3 mois)", st_today: "Taux aujourd’hui", high: "Plus haut (3 mois)",
+  ch_h: "Évolution du taux de vente", ch_demo: "Courbe illustrative : historique réel non connecté.", m1: "sur 1 mois", m2: "sur 2 mois", m3: "sur 3 mois", ch_few: "Historique insuffisant sur cette période.", low: "Plus bas ({p})", st_today: "Taux aujourd’hui", high: "Plus haut ({p})",
   lock_day: "Bloquer le taux du jour (2h)", lock_day_msg: "Salam YET-CHANGE, je veux bloquer le taux du jour {c} : {r} (Vente). Je passe à l’agence Hamria d’ici 2h.",
   proj_h: "Quel est votre projet ?", p_btn: "WhatsApp", p_msg: "Salam YET-CHANGE, projet : {t}. Pouvez-vous me confirmer les justificatifs et la disponibilité des devises ?",
   p1t: "Tourisme & voyages", p1x: "Dotation touristique. À apporter : passeport valide.",
@@ -241,7 +256,7 @@ ar: { tag: "معتمد من مكتب الصرف", tab1: "الأسعار والم
   big: "عملية بمبلغ كبير: تفضلوا مباشرة إلى شباك YET-CHANGE (الحمرية) أو أخبرونا بالمبلغ عبر واتساب لتحضير مبلغكم في صالون هادئ.",
   lock_btn: "احجزوا هذا السعر مجانا لمدة ساعتين (واتساب)",
   lock_msg: "السلام عليكم YET-CHANGE، أريد حجز {a} {c} بالسعر المعروض {r} ({k}). سأمر إلى وكالة الحمرية خلال ساعتين.",
-  ch_h: "منحنى 3 أشهر: سعر البيع", ch_demo: "منحنى توضيحي: السجل الفعلي غير مربوط بعد.", low: "الأدنى (3 أشهر)", st_today: "سعر اليوم", high: "الأعلى (3 أشهر)",
+  ch_h: "تطور سعر البيع", ch_demo: "منحنى توضيحي: السجل الفعلي غير مربوط بعد.", m1: "خلال شهر", m2: "خلال شهرين", m3: "خلال 3 أشهر", ch_few: "السجل غير كاف لهذه الفترة.", low: "الأدنى ({p})", st_today: "سعر اليوم", high: "الأعلى ({p})",
   lock_day: "احجزوا سعر اليوم (ساعتان)", lock_day_msg: "السلام عليكم YET-CHANGE، أريد حجز سعر اليوم لـ {c}: {r} (بيع). سأمر إلى وكالة الحمرية خلال ساعتين.",
   proj_h: "ما هو مشروعك؟", p_btn: "واتساب", p_msg: "السلام عليكم YET-CHANGE، مشروعي: {t}. هل يمكنكم تأكيد الوثائق المطلوبة وتوفر العملات؟",
   p1t: "السياحة والسفر", p1x: "المخصص السياحي. المطلوب: جواز سفر ساري المفعول.",
@@ -264,7 +279,7 @@ en: { tag: "Licensed by Office des Changes", tab1: "Rates & Simulator", tab2: "3
   big: "Large transaction: come straight to the YET-CHANGE counter (Hamria) or tell us your amount on WhatsApp so we can prepare your cash in a discreet room.",
   lock_btn: "Lock this rate for free for 2h (WhatsApp)",
   lock_msg: "Salam YET-CHANGE, I want to lock {a} {c} at the displayed rate of {r} ({k}). I will come to the Hamria branch within 2 hours.",
-  ch_h: "3-month chart: selling rate", ch_demo: "Illustrative curve: real history not connected.", low: "Lowest (3 months)", st_today: "Today’s rate", high: "Highest (3 months)",
+  ch_h: "Selling rate trend", ch_demo: "Illustrative curve: real history not connected.", m1: "over 1 month", m2: "over 2 months", m3: "over 3 months", ch_few: "Not enough history for this period.", low: "Lowest ({p})", st_today: "Today’s rate", high: "Highest ({p})",
   lock_day: "Lock today’s rate (2h)", lock_day_msg: "Salam YET-CHANGE, I want to lock today’s {c} rate: {r} (Sell). I will come to the Hamria branch within 2 hours.",
   proj_h: "What is your project?", p_btn: "WhatsApp", p_msg: "Salam YET-CHANGE, project: {t}. Can you confirm the documents required and the currency availability?",
   p1t: "Tourism & travel", p1x: "Tourist allowance. Bring: valid passport.",
@@ -289,7 +304,7 @@ const PRJ = [["🛂", 1], ["🕋", 2], ["🎓", 3], ["🩺", 4], ["💻", 5], ["
 const LOC = { fr: "fr-FR", en: "en-GB", ar: "ar-MA-u-nu-latn" }, NUM = { fr: "fr-FR", en: "en-GB", ar: "en-GB" };
 const $ = s => document.querySelector(s);
 const num = s => parseFloat(String(s).replace(/\s/g, "").replace(",", "."));
-let lang = "fr", dir = "buy", unit = "dev", hist = {}, histOk = false;
+let lang = "fr", dir = "buy", unit = "dev", per = 90, hist = {}, CH = null;
 let state = { rates: MANUAL_RATES, updated_at: MANUAL_UPDATED_AT, live: false, loading: true };
 try { const s = localStorage.getItem("yc-lang"); if (I18N[s]) lang = s; } catch (e) {}
 
@@ -339,13 +354,24 @@ async function loadRates() {
   } catch (e) { console.warn("Tableau Google Sheets inaccessible, taux de secours utilisés :", e.message); }
   finally { state.loading = false; renderAll(); }
 }
-async function loadHistory() {   // optionnel : Date, Devise, Vente
+function parseDate(str) {   // AAAA-MM-JJ ou JJ/MM/AAAA
+  str = String(str || "").trim(); let m;
+  if ((m = str.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/))) return Date.UTC(+m[1], +m[2] - 1, +m[3]);
+  if ((m = str.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})/))) return Date.UTC(+m[3], +m[2] - 1, +m[1]);
+  return NaN;
+}
+async function loadHistory() {   // optionnel : onglet Historique (Date, Devise, Vente)
   if (!HISTORY_CSV_URL) return;
   try {
-    const rows = (await getCSV(HISTORY_CSV_URL)).slice(1), h = {};
-    rows.forEach(([d, c, v]) => { c = (c || "").trim().toUpperCase(); v = toNum(v); if (CURS.includes(c) && v > 0 && d) (h[c] = h[c] || []).push([d.trim(), v]); });
-    CURS.forEach(c => { if (h[c]) hist[c] = h[c].sort((a, b) => a[0] < b[0] ? -1 : 1).slice(-91).map(x => x[1]); });
-    histOk = Object.keys(hist).length > 0; drawChart();
+    const rows = await getCSV(HISTORY_CSV_URL), head = (rows[0] || []).map(h => h.trim().toLowerCase());
+    const col = (n, d) => head.indexOf(n) >= 0 ? head.indexOf(n) : d;
+    const iT = col("date", 0), iC = col("devise", 1), iV = col("vente", 2), h = {};
+    (head.includes("date") || head.includes("devise") ? rows.slice(1) : rows).forEach(r => {
+      const c = (r[iC] || "").trim().toUpperCase(), v = toNum(r[iV]), t = parseDate(r[iT]);
+      if (CURS.includes(c) && v > 0 && !isNaN(t)) (h[c] = h[c] || []).push({ t, v });
+    });
+    CURS.forEach(c => { if (h[c]) hist[c] = h[c].sort((a, b) => a.t - b.t); });
+    drawChart();
   } catch (e) { console.warn("Historique indisponible, courbe illustrative conservée :", e.message); }
 }
 
@@ -353,10 +379,10 @@ async function loadHistory() {   // optionnel : Date, Devise, Vente
 function renderRates() {
   $("#rows").innerHTML = CURS.map(c => {
     const r = R(c), none = state.loading ? "…" : "—";
-    return `<tr class="border-t border-[#D4AF37]/10">
+    return `<tr class="border-t border-[#F2C94C]/10">
       <td class="py-3 ps-3"><div class="flex items-center gap-2"><span class="text-xl leading-none" aria-hidden="true">${FLAGS[c]}</span><b class="font-mono">${c}</b></div></td>
       <td class="px-2 py-3 text-end font-mono text-[13px] font-semibold tnum">${r ? fmt(r.achat) : none}</td>
-      <td class="px-2 py-3 text-end font-mono text-[13px] font-semibold text-emerald-300 tnum">${r ? fmt(r.vente) : none}</td>
+      <td class="px-2 py-3 text-end font-mono text-[13px] font-semibold text-[#F2C94C] tnum">${r ? fmt(r.vente) : none}</td>
       <td class="py-3 pe-3 text-end"><button type="button" data-c="${c}" class="btn btn-gold btn-sm">${T("lock_s")}</button></td></tr>`;
   }).join("");
   let d = "";
@@ -393,15 +419,17 @@ $("#uDev").onclick = () => { unit = "dev"; sim(); };
 $("#uMad").onclick = () => { unit = "mad"; sim(); };
 $("#simCur").onchange = sim; $("#simAmt").oninput = sim;
 
-/* ---- Courbe 3 mois (SVG) ---- */
+/* ---- Courbe interactive (SVG) : périodes 1M / 2M / 3M, axes, infobulle ---- */
+const DF = o => { try { return new Intl.DateTimeFormat(LOC[lang], o); } catch (e) { return new Intl.DateTimeFormat("fr-FR", o); } };
 function series(c) {
   const r = R(c); if (!r) return null;
-  if (hist[c] && hist[c].length > 1) return { pts: hist[c], real: true };
-  let seed = [...c].reduce((a, ch) => (a * 31 + ch.charCodeAt(0)) >>> 0, 7);
+  const a = hist[c];
+  if (a && a.length) { const end = a[a.length - 1].t; return { real: true, pts: a.filter(p => p.t >= end - per * 864e5) }; }
+  let seed = [...c].reduce((x, ch) => (x * 31 + ch.charCodeAt(0)) >>> 0, 7);
   const rnd = () => (seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296, w = [0];
   for (let i = 1; i < 91; i++) w.push(w[i - 1] + (rnd() - .5));
   const last = w[90], span = (Math.max(...w) - Math.min(...w)) || 1;
-  return { pts: w.map(x => r.vente * (1 + (x - last) / span * .03)), real: false };   // illustration ancrée sur le taux du jour
+  return { real: false, pts: w.map(x => ({ v: r.vente * (1 + (x - last) / span * .03) })) };   // illustration ancrée sur le taux du jour
 }
 function curve(P) {
   let d = `M${P[0][0]},${P[0][1]}`;
@@ -411,24 +439,56 @@ function curve(P) {
   }
   return d;
 }
+function setActive(i) {
+  if (!CH) return;
+  const { P, s, n, pl } = CH, p = s.pts[i], pct = (s.pts[n - 1].v - s.pts[0].v) / s.pts[0].v * 100;
+  ["#gl", "#act"].forEach((id, k) => { const el = $(id); el.setAttribute(k ? "cx" : "x1", P[i][0]); if (!k) el.setAttribute("x2", P[i][0]); else el.setAttribute("cy", P[i][1]); el.setAttribute("visibility", "visible"); });
+  const col = pct > 0 ? "text-emerald-400" : pct < 0 ? "text-rose-400" : "text-white", sg = new Intl.NumberFormat(NUM[lang], { minimumFractionDigits: 2, maximumFractionDigits: 2, signDisplay: "exceptZero" }).format(pct);
+  $("#chTip").innerHTML = `<span class="font-bold text-[#F2C94C]">${DF({ day: "2-digit", month: "short", year: "numeric", timeZone: "UTC" }).format(p.t)} : ${fmt(p.v)} MAD</span><span class="ms-3 font-bold ${col}">${pct > 0 ? "▲ " : pct < 0 ? "▼ " : ""}${sg} % ${T("m" + pl)}</span>`;
+}
+function hit(e) {
+  if (!CH) return;
+  const b = $("#chart svg").getBoundingClientRect(), x = (e.clientX - b.left) / b.width * CH.W;
+  setActive(Math.max(0, Math.min(CH.n - 1, Math.round((x - CH.L) / (CH.W - CH.L - CH.Rr) * (CH.n - 1)))));
+}
 function drawChart() {
-  const c = $("#chCur").value || CURS[0], s = series(c), r = R(c), box = $("#chart");
-  $("#chDemo").hidden = !s || s.real;
+  const c = $("#chCur").value || CURS[0], s = series(c), r = R(c), box = $("#chart"), tip = $("#chTip"), pl = per / 30;
+  document.querySelectorAll("[data-per]").forEach(b => b.setAttribute("aria-pressed", +b.dataset.per === per));
+  $("#lowL").textContent = T("low", { p: pl + "M" }); $("#highL").textContent = T("high", { p: pl + "M" });
   $("#stNow").textContent = r ? fmt(r.vente) : "—";
-  $("#stLow").textContent = s && s.real ? fmt(Math.min(...s.pts)) : "—";
-  $("#stHigh").textContent = s && s.real ? fmt(Math.max(...s.pts)) : "—";
   $("#lockDay").href = waLink(T("lock_day_msg", { c, r: r ? fmt(r.vente) : "—" }));
+  $("#chDemo").hidden = !s || s.real;
+  const real = !!s && s.real && s.pts.length > 1, vals = s ? s.pts.map(p => p.v) : [];
+  $("#stLow").textContent = real ? fmt(Math.min(...vals)) : "—";
+  $("#stHigh").textContent = real ? fmt(Math.max(...vals)) : "—";
+  CH = null; tip.hidden = !s || !s.real;
   if (!s) { box.innerHTML = ""; return; }
-  const W = 600, H = 240, pad = 14, lo = Math.min(...s.pts), hi = Math.max(...s.pts), rng = (hi - lo) || 1;
-  const P = s.pts.map((v, i) => [pad + i * (W - 2 * pad) / (s.pts.length - 1), H - pad - 8 - ((v - lo) / rng) * (H - 2 * pad - 24)]);
-  const d = curve(P), l = P[P.length - 1];
-  box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" class="block w-full" role="img" aria-label="${c}"><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#10B981" stop-opacity=".38"/><stop offset="1" stop-color="#10B981" stop-opacity="0"/></linearGradient></defs>
-    ${[.25, .5, .75].map(f => `<line x1="0" x2="${W}" y1="${H * f}" y2="${H * f}" stroke="rgba(212,175,55,.14)" stroke-dasharray="3 7"/>`).join("")}
-    <path d="${d}L${l[0]},${H}L${P[0][0]},${H}Z" fill="url(#cg)"/>
-    <path d="${d}" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 6px rgba(16,185,129,.85))"/>
-    <circle class="pulse" cx="${l[0]}" cy="${l[1]}" r="9" fill="#10B981"/><circle cx="${l[0]}" cy="${l[1]}" r="4.5" fill="#D4AF37"/></svg>`;
+  if (s.real && !real) { box.innerHTML = ""; tip.textContent = T("ch_few"); return; }
+  const W = 600, H = 270, L = real ? 54 : 12, Rr = 12, Tp = 14, B = real ? 30 : 12, n = vals.length;
+  const lo = Math.min(...vals), hi = Math.max(...vals), rng = (hi - lo) || 1;
+  const X = i => L + i * (W - L - Rr) / (n - 1), Y = v => Tp + (1 - (v - lo) / rng) * (H - Tp - B);
+  const P = vals.map((v, i) => [X(i), Y(v)]), d = curve(P), l = P[n - 1];
+  const txt = "font-size=\"12\" fill=\"rgba(255,255,255,.7)\" font-family=\"JetBrains Mono,monospace\"";
+  const grid = [hi, (hi + lo) / 2, lo].map(v => `<line x1="${L}" x2="${W - Rr}" y1="${Y(v)}" y2="${Y(v)}" stroke="rgba(242,201,76,.18)" stroke-dasharray="3 6"/>` + (real ? `<text x="${L - 8}" y="${Y(v) + 4}" text-anchor="end" ${txt}>${f2(v)}</text>` : "")).join("");
+  let xl = "";
+  if (real) {
+    const f = DF({ day: "2-digit", month: "short", timeZone: "UTC" });
+    xl = [...new Set([0, Math.round((n - 1) / 3), Math.round(2 * (n - 1) / 3), n - 1])].map(i => `<text x="${X(i)}" y="${H - 8}" text-anchor="${i === 0 ? "start" : i === n - 1 ? "end" : "middle"}" ${txt}>${f.format(s.pts[i].t)}</text>`).join("");
+  }
+  box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" class="block w-full" style="touch-action:pan-y;cursor:crosshair" role="img" aria-label="${c}"><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2C94C" stop-opacity=".34"/><stop offset="1" stop-color="#F2C94C" stop-opacity="0"/></linearGradient></defs>
+    ${grid}${xl}
+    <path d="${d}L${l[0]},${H - B}L${P[0][0]},${H - B}Z" fill="url(#cg)"/>
+    <path d="${d}" fill="none" stroke="#F2C94C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 6px rgba(242,201,76,.75))"/>
+    ${real ? P.map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="2.4" fill="#F2C94C"/>`).join("") : ""}
+    <circle class="pulse" cx="${l[0]}" cy="${l[1]}" r="9" fill="#F2C94C"/>
+    <line id="gl" x1="0" x2="0" y1="${Tp}" y2="${H - B}" stroke="rgba(255,255,255,.4)" visibility="hidden"/>
+    <circle id="act" cx="0" cy="0" r="6" fill="#030826" stroke="#F2C94C" stroke-width="2.5" visibility="hidden"/></svg>`;
+  if (real) { CH = { P, s, n, pl, W, L, Rr }; setActive(n - 1); }
 }
 $("#chCur").onchange = drawChart;
+document.querySelectorAll("[data-per]").forEach(b => b.onclick = () => { per = +b.dataset.per; drawChart(); });
+["pointermove", "pointerdown"].forEach(ev => $("#chart").addEventListener(ev, hit));
+$("#chart").addEventListener("pointerleave", e => { if (e.pointerType === "mouse" && CH) setActive(CH.n - 1); });
 
 /* ---- Statut Ouvert / Fermé (Africa/Casablanca) ---- */
 function nowMorocco() {
@@ -447,15 +507,15 @@ function getStatus() {
 }
 function updateStatus() {
   const s = getStatus(), today = nowMorocco().day;
-  const cls = "items-center gap-2 rounded-full px-3 py-1 text-xs font-bold ring-1 " + (s.open ? "bg-emerald-400/15 text-emerald-300 ring-emerald-400/40" : "bg-rose-400/15 text-rose-300 ring-rose-400/40");
-  const dot = `<span class="h-2 w-2 rounded-full ${s.open ? "animate-pulse bg-emerald-400" : "bg-rose-400"}"></span>`;
+  const cls = "items-center gap-2 rounded-full px-3 py-1 text-xs font-bold ring-1 " + (s.open ? "bg-emerald-400/15 text-emerald-300 ring-emerald-400/40" : "bg-[#E11D48]/15 text-rose-200 ring-[#E11D48]/60");
+  const dot = `<span class="h-2 w-2 rounded-full ${s.open ? "animate-pulse bg-emerald-400" : "bg-[#E11D48]"}"></span>`;
   document.querySelectorAll("[data-pill]").forEach(el => {
     el.className = "inline-flex " + cls + (el.dataset.m ? " max-sm:hidden" : "");
     el.innerHTML = dot + T(s.open ? "open" : "closed") + (!el.dataset.m && s.sub ? " : " + s.sub : "");
   });
   $("#hours").innerHTML = [1, 2, 3, 4, 5, 6, 0].map(d => {
     const slots = (HOURS[d] || []).map(x => x.join(" – ")).join("  /  ") || T("closed"), me = d === today;
-    return `<li class="flex justify-between gap-3 py-2 ${me ? "font-bold text-emerald-300" : "text-emerald-50/70"}"><span>${I18N[lang].days[d]}</span><span dir="ltr" class="font-mono tnum">${slots}</span></li>`;
+    return `<li class="flex justify-between gap-3 py-2 ${me ? "font-bold text-[#F2C94C]" : "text-white/70"}"><span>${I18N[lang].days[d]}</span><span dir="ltr" class="font-mono tnum">${slots}</span></li>`;
   }).join("");
 }
 
@@ -463,7 +523,7 @@ function updateStatus() {
 function renderProjects() {
   $("#proj").innerHTML = PRJ.map(([ic, n]) => `<article class="glass sheen flex flex-col gap-2 p-4">
     <div class="flex items-center gap-2.5"><span class="text-2xl" aria-hidden="true">${ic}</span><h3 class="font-bold leading-tight">${T("p" + n + "t")}</h3></div>
-    <p class="flex-1 text-sm leading-relaxed text-emerald-50/75">${T("p" + n + "x")}</p>${n === 1 ? `<p class="rounded-lg border border-[#D4AF37]/25 bg-[#D4AF37]/5 px-3 py-2 text-xs leading-relaxed text-[#e6cf85]">${T("p1n")}</p>` : ""}
+    <p class="flex-1 text-sm leading-relaxed text-white/75">${T("p" + n + "x")}</p>${n === 1 ? `<p class="rounded-lg border border-[#F2C94C]/25 bg-[#F2C94C]/5 px-3 py-2 text-xs leading-relaxed text-[#e6cf85]">${T("p1n")}</p>` : ""}
     <a href="${waLink(T("p_msg", { t: T("p" + n + "t") }))}" target="_blank" rel="noopener" class="btn btn-gold btn-sm self-start">${T("p_btn")}</a></article>`).join("");
 }
 
@@ -493,19 +553,24 @@ function applyLang(l) {
 }
 document.querySelectorAll("[data-lang]").forEach(b => b.onclick = () => applyLang(b.dataset.lang));
 
-/* ---- Arrière-plan « matrix » discret (canvas léger, 6 % d’opacité) ---- */
+/* ---- Arrière-plan « matrix » financier (canvas léger, 14 % d’opacité, colonnes de 34 px) ---- */
 (function () {
   const cv = $("#fx"), ctx = cv.getContext && cv.getContext("2d"); if (!ctx) return;
-  const SYM = ["€", "$", "£", "MAD", "10.74"], fs = 15; let W, H, drops = [], timer = null;
-  const size = () => { W = cv.width = innerWidth; H = cv.height = innerHeight; drops = Array.from({ length: Math.ceil(W / 54) }, () => Math.random() * H / fs); };
+  const SYM = ["€", "$", "£", "MAD", "CHF", "SAR", "AED", "10.74", "9.82", "12.89", "0%", "+0.45%"];
+  const COL = ["#F2C94C", "#22D3EE", "#E3B93C", "#67E8F9"], fs = 12, GAP = 34;
+  let W, H, drops = [], timer = null;
+  const size = () => { W = cv.width = innerWidth; H = cv.height = innerHeight; drops = Array.from({ length: Math.ceil(W / GAP) }, () => Math.random() * H / fs); };
   function frame() {
-    ctx.fillStyle = "rgba(6,13,10,.16)"; ctx.fillRect(0, 0, W, H);
-    ctx.fillStyle = "#10B981"; ctx.font = fs + "px 'JetBrains Mono',monospace";
-    drops.forEach((y, i) => { ctx.fillText(SYM[(Math.random() * SYM.length) | 0], i * 54, y * fs); drops[i] = y * fs > H && Math.random() > .975 ? 0 : y + .5; });
+    ctx.fillStyle = "rgba(3,8,38,.14)"; ctx.fillRect(0, 0, W, H);
+    ctx.font = "600 " + fs + "px 'JetBrains Mono',monospace";
+    drops.forEach((y, i) => {
+      ctx.fillStyle = COL[i % COL.length]; ctx.fillText(SYM[(Math.random() * SYM.length) | 0], i * GAP, y * fs);
+      drops[i] = y * fs > H && Math.random() > .96 ? 0 : y + .45;
+    });
   }
-  const run = () => { if (!timer && !document.hidden) timer = setInterval(frame, 110); }, stop = () => { clearInterval(timer); timer = null; };
+  const run = () => { if (!timer && !document.hidden) timer = setInterval(frame, 55); }, stop = () => { clearInterval(timer); timer = null; };
   size(); addEventListener("resize", size);
-  if (matchMedia("(prefers-reduced-motion: reduce)").matches) { for (let i = 0; i < 40; i++) frame(); return; }
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) { for (let i = 0; i < 60; i++) frame(); return; }
   document.addEventListener("visibilitychange", () => document.hidden ? stop() : run()); run();
 })();
 
