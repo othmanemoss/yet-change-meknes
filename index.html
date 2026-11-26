@@ -309,7 +309,7 @@ let state = { rates: MANUAL_RATES, updated_at: MANUAL_UPDATED_AT, live: false, l
 try { const s = localStorage.getItem("yc-lang"); if (I18N[s]) lang = s; } catch (e) {}
 
 const T = (k, v = {}) => String(I18N[lang][k] ?? I18N.fr[k] ?? k).replace(/\{(\w+)\}/g, (_, x) => v[x] ?? "");
-const fmt = n => new Intl.NumberFormat(NUM[lang], { minimumFractionDigits: 2, maximumFractionDigits: 4 }).format(n);
+const fmt = n => new Intl.NumberFormat(NUM[lang], { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
 const fa = n => new Intl.NumberFormat(NUM[lang], { maximumFractionDigits: 2 }).format(n);
 const f2 = n => new Intl.NumberFormat(NUM[lang], { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
 const R = c => state.loading ? null : state.rates[c];
