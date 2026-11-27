@@ -387,8 +387,8 @@ function renderRates() {
     const r = R(c), none = state.loading ? "…" : "—";
     return `<tr class="border-t border-[#F2C94C]/10">
       <td class="py-3 ps-3"><div class="flex items-center gap-2"><span class="text-xl leading-none" aria-hidden="true">${FLAGS[c]}</span><b class="font-mono">${c}</b></div></td>
-      <td class="px-2 py-3 text-end font-mono text-[13px] font-semibold tnum">${r ? fmt(r.achat) : none}</td>
-      <td class="px-2 py-3 text-end font-mono text-[13px] font-semibold text-[#F2C94C] tnum">${r ? fmt(r.vente) : none}</td>
+      <td class="px-2 py-3 text-end font-mono text-[13px] font-semibold tnum">${r ? f2(r.achat) : none}</td>
+      <td class="px-2 py-3 text-end font-mono text-[13px] font-semibold text-[#F2C94C] tnum">${r ? f2(r.vente) : none}</td>
       <td class="py-3 pe-3 text-end"><button type="button" data-c="${c}" class="btn btn-gold btn-sm">${T("lock_s")}</button></td></tr>`;
   }).join("");
   let d = "";
