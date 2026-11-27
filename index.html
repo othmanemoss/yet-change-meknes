@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#030826">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%22316%20212%203549%203549%22%3E%3Crect%20x=%22316%22%20y=%22212%22%20width=%223549%22%20height=%223549%22%20rx=%22709%22%20fill=%22%23030826%22/%3E%3Cpath%20fill=%22%23E11D48%22%20fill-rule=%22evenodd%22%20d=%22M2064%201824%201896%201993%201896%202508%202065%202678%202558%202677%202785%202430%202184%202430%202182%202356%202768%202356%202769%201993%202600%201824ZM2182%202071%202483%202070%202483%202140%202183%202142ZM3165%201611%202930%201766%202865%201854%202866%202070%202924%202072%202924%202563%203038%202677%203423%202677%203423%202434%203206%202433%203206%202071%203477%202071%203477%201824%203207%201825%203198%201611ZM2486%201095%201947%201094%201580%201552%201255%201094%20704%201095%201359%201961%201360%202880%201786%202604%201785%201957Z%22/%3E%3Cpath%20fill=%22%23F5BE41%22%20fill-rule=%22evenodd%22%20d=%22M2078%201862%201931%202009%201931%202491%202077%202639%202541%202640%202698%202468%202147%202467%202147%202320%202732%202319%202732%202008%202586%201862ZM2146%202034%202519%202033%202519%202178%202147%202179ZM3161%201656%202955%201793%202902%201865%202901%202032%202960%202034%202959%202545%203051%202639%203385%202640%203386%202471%203170%202470%203170%202034%203440%202033%203440%201862%203171%201862ZM2403%201135%201964%201134%201577%201615%201237%201134%20784%201134%201399%201950%201399%202809%201747%202583%201748%201945Z%22/%3E%3C/svg%3E">
 <title>YET-CHANGE Meknès – Bureau de change, Hamria</title>
 <meta name="description" content="YET-CHANGE, bureau de change à Hamria, Meknès (Rue d’Accra, Passage Karzazi). Taux du jour EUR, USD, GBP, CAD, CHF, SAR, AED, simulateur et blocage de taux 2h.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,9 +26,13 @@ tailwind.config = { theme: { extend: { fontFamily: {
 
   /* Verre dépoli bleu nuit, bordure Or Satiné, ombres multicouches */
   .glass { position: relative; overflow: hidden; border-radius: 1.25rem; border: 1px solid rgba(242,201,76,.3);
-    background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,0)), rgba(7,19,77,.55); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,0)), rgba(7,19,77,.8);
     box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 2px 4px rgba(0,0,0,.4), 0 14px 30px -12px rgba(0,0,0,.7), 0 30px 60px -34px rgba(242,201,76,.22); }
-  .soft { background: rgba(3,8,38,.62); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-radius: .8rem; padding: .55rem .8rem; }
+  .soft { background: rgba(3,8,38,.8); border-radius: .8rem; padding: .55rem .8rem; }
+  @media (min-width: 768px) {
+    .glass { background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,0)), rgba(7,19,77,.55); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+    .soft { background: rgba(3,8,38,.62); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+  }
   .sheen::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, transparent 38%, rgba(242,201,76,.2) 50%, transparent 62%); transform: translateX(-130%); transition: transform .9s cubic-bezier(.22,1,.36,1); }
   .sheen:hover::after, .sheen:active::after { transform: translateX(130%); }
 
@@ -53,7 +58,7 @@ tailwind.config = { theme: { extend: { fontFamily: {
   .btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
   .btn-gold { background: #F2C94C; color: #030826; }
   .btn-ghost { color: #fff; box-shadow: inset 0 0 0 1.5px rgba(242,201,76,.55); --sweep: #F2C94C; --fg-h: #030826; }
-  .btn-sm { --big: .9rem; padding: .42rem .65rem; font-size: .72rem; }
+  .btn-sm { --big: .9rem; padding: .55rem .7rem; font-size: .72rem; }
 
   .pulse { transform-box: fill-box; transform-origin: center; animation: pulse 1.8s ease-out infinite; }
   @keyframes pulse { 0% { transform: scale(.6); opacity: .7; } 100% { transform: scale(2.2); opacity: 0; } }
@@ -68,13 +73,13 @@ tailwind.config = { theme: { extend: { fontFamily: {
 <div class="relative z-10 mx-auto max-w-xl px-3 pb-10 md:max-w-6xl md:px-6">
 
   <!-- EN-TÊTE COMPACT + ONGLETS -->
-  <div class="sticky top-0 z-30 -mx-3 border-b border-[#F2C94C]/25 bg-[#030826]/85 px-3 backdrop-blur md:-mx-6 md:px-6">
-    <div class="flex items-center justify-between gap-2 py-2.5">
-      <div class="flex items-center gap-2.5">
-        <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg font-mono text-lg font-bold text-[#030826]" style="background:linear-gradient(135deg,#F2C94C,#E0B53A)">Y</span>
-        <div class="leading-tight"><b class="block tracking-tight">YET-CHANGE</b><span data-i18n="tag" class="block text-[11px] text-white/60"></span></div>
-      </div>
-      <div class="flex items-center gap-2">
+  <div class="sticky top-0 z-30 -mx-3 border-b border-[#F2C94C]/25 bg-[#030826]/95 px-3 md:-mx-6 md:bg-[#030826]/85 md:px-6 md:backdrop-blur">
+    <div class="flex items-center justify-between gap-2 py-2">
+      <a href="#top" class="flex min-w-0 items-center gap-2.5" aria-label="YET-CHANGE Meknès">
+        <svg viewBox="607 997 2968 2447" class="h-10 w-auto shrink-0 md:h-12" role="img" aria-label="Yet change"><title>YET-CHANGE</title><path fill="#E11D48" fill-rule="evenodd" d="M1174 3052 1175 3204 1233 3261 1452 3261 1452 3175 1276 3174 1275 3083 1405 3082 1454 2994 1233 2994ZM2925 2993 2871 3048 2871 3207 2926 3261 3081 3261 3153 3179 2966 3180 2965 3160 3146 3160 3147 3049 3093 2993ZM2965 3073 3053 3073 3053 3094 2966 3095ZM2601 2993 2547 3048 2547 3182 2601 3237 2699 3237 2717 3227 2718 3259 2604 3260 2556 3345 2758 3345 2812 3289 2813 3047 2762 2993ZM2640 3079 2718 3078 2719 3150 2641 3151ZM2211 2994 2212 3261 2308 3261 2309 3082 2388 3084 2388 3261 2485 3261 2486 3051 2428 2993 2326 2993 2307 3009 2306 2993ZM1919 2992 1873 3079 2045 3079 2046 3091 1909 3094 1859 3139 1859 3205 1916 3261 2039 3261 2055 3244 2058 3261 2145 3261 2146 3050 2090 2993ZM1957 3160 2041 3158 2047 3160 2047 3178 1959 3179ZM1519 2906 1520 3261 1618 3261 1619 3083 1699 3084 1699 3261 1798 3261 1798 3051 1741 2994 1630 2995 1619 3005 1618 2906ZM2064 1824 1896 1993 1896 2508 2065 2678 2558 2677 2785 2430 2184 2430 2182 2356 2768 2356 2769 1993 2600 1824ZM2182 2071 2483 2070 2483 2140 2183 2142ZM3165 1611 2930 1766 2865 1854 2866 2070 2924 2072 2924 2563 3038 2677 3423 2677 3423 2434 3206 2433 3206 2071 3477 2071 3477 1824 3207 1825 3198 1611ZM2486 1095 1947 1094 1580 1552 1255 1094 704 1095 1359 1961 1360 2880 1786 2604 1785 1957Z"/><path fill="#F5BE41" fill-rule="evenodd" d="M1186 3058 1187 3199 1237 3248 1439 3248 1439 3186 1264 3185 1264 3072 1399 3070 1435 3007 1237 3007ZM2223 3006 2223 3248 2296 3248 2298 3071 2400 3072 2400 3248 2473 3248 2473 3056 2425 3006 2325 3007 2298 3031 2297 3006ZM2927 3007 2883 3054 2883 3202 2930 3248 3073 3249 3127 3191 2954 3192 2954 3149 3133 3148 3135 3053 3087 3005ZM2953 3062 3064 3061 3065 3105 2954 3106ZM1925 3006 1894 3066 2058 3067 2058 3102 1915 3103 1872 3143 1872 3200 1921 3248 2036 3248 2063 3223 2065 3248 2133 3248 2134 3054 2085 3005ZM1956 3162 1959 3158 2046 3158 2048 3178 1958 3179ZM2604 3005 2559 3053 2558 3175 2606 3225 2706 3224 2729 3205 2730 3270 2612 3271 2576 3333 2752 3332 2800 3284 2800 3051 2756 3004ZM2629 3068 2730 3067 2730 3161 2630 3162ZM1532 2918 1531 3247 1605 3248 1607 3071 1711 3071 1711 3248 1785 3249 1785 3056 1736 3007 1632 3007 1607 3031 1606 2918ZM2078 1862 1931 2009 1931 2491 2077 2639 2541 2640 2698 2468 2147 2467 2147 2320 2732 2319 2732 2008 2586 1862ZM2146 2034 2519 2033 2519 2178 2147 2179ZM3161 1656 2955 1793 2902 1865 2901 2032 2960 2034 2959 2545 3051 2639 3385 2640 3386 2471 3170 2470 3170 2034 3440 2033 3440 1862 3171 1862 3169 1759ZM2403 1135 1964 1134 1577 1615 1237 1134 784 1134 1399 1950 1399 2809 1747 2583 1748 1945Z"/></svg>
+        <div class="min-w-0 leading-tight"><b class="block tracking-tight">YET-CHANGE</b><span data-i18n="tag" class="block truncate text-[11px] text-white/60"></span></div>
+      </a>
+      <div class="flex shrink-0 items-center gap-2">
         <div class="seg" role="group" aria-label="Langue"><button data-lang="fr" type="button">FR</button><button data-lang="ar" type="button">AR</button><button data-lang="en" type="button">EN</button></div>
         <span data-pill data-m="1"></span>
       </div>
@@ -107,7 +112,7 @@ tailwind.config = { theme: { extend: { fontFamily: {
             <tbody id="rows"></tbody>
           </table>
         </div>
-        <p data-i18n="reassure" class="rounded-xl border border-[#F2C94C]/25 bg-[#030826]/60 px-4 py-3 text-sm leading-relaxed text-white/90 backdrop-blur"></p>
+        <p data-i18n="reassure" class="rounded-xl border border-[#F2C94C]/25 bg-[#030826]/60 px-4 py-3 text-sm leading-relaxed text-white/90 md:backdrop-blur"></p>
         <p data-i18n="legend" class="soft text-xs text-white/60"></p>
       </div>
 
@@ -181,6 +186,7 @@ tailwind.config = { theme: { extend: { fontFamily: {
   </main>
 
   <footer class="soft mt-8 space-y-2 text-center text-xs text-white/60">
+    <div class="flex justify-center"><svg viewBox="607 997 2968 2447" class="h-14 w-auto" role="img" aria-label="Yet change"><title>YET-CHANGE</title><path fill="#E11D48" fill-rule="evenodd" d="M1174 3052 1175 3204 1233 3261 1452 3261 1452 3175 1276 3174 1275 3083 1405 3082 1454 2994 1233 2994ZM2925 2993 2871 3048 2871 3207 2926 3261 3081 3261 3153 3179 2966 3180 2965 3160 3146 3160 3147 3049 3093 2993ZM2965 3073 3053 3073 3053 3094 2966 3095ZM2601 2993 2547 3048 2547 3182 2601 3237 2699 3237 2717 3227 2718 3259 2604 3260 2556 3345 2758 3345 2812 3289 2813 3047 2762 2993ZM2640 3079 2718 3078 2719 3150 2641 3151ZM2211 2994 2212 3261 2308 3261 2309 3082 2388 3084 2388 3261 2485 3261 2486 3051 2428 2993 2326 2993 2307 3009 2306 2993ZM1919 2992 1873 3079 2045 3079 2046 3091 1909 3094 1859 3139 1859 3205 1916 3261 2039 3261 2055 3244 2058 3261 2145 3261 2146 3050 2090 2993ZM1957 3160 2041 3158 2047 3160 2047 3178 1959 3179ZM1519 2906 1520 3261 1618 3261 1619 3083 1699 3084 1699 3261 1798 3261 1798 3051 1741 2994 1630 2995 1619 3005 1618 2906ZM2064 1824 1896 1993 1896 2508 2065 2678 2558 2677 2785 2430 2184 2430 2182 2356 2768 2356 2769 1993 2600 1824ZM2182 2071 2483 2070 2483 2140 2183 2142ZM3165 1611 2930 1766 2865 1854 2866 2070 2924 2072 2924 2563 3038 2677 3423 2677 3423 2434 3206 2433 3206 2071 3477 2071 3477 1824 3207 1825 3198 1611ZM2486 1095 1947 1094 1580 1552 1255 1094 704 1095 1359 1961 1360 2880 1786 2604 1785 1957Z"/><path fill="#F5BE41" fill-rule="evenodd" d="M1186 3058 1187 3199 1237 3248 1439 3248 1439 3186 1264 3185 1264 3072 1399 3070 1435 3007 1237 3007ZM2223 3006 2223 3248 2296 3248 2298 3071 2400 3072 2400 3248 2473 3248 2473 3056 2425 3006 2325 3007 2298 3031 2297 3006ZM2927 3007 2883 3054 2883 3202 2930 3248 3073 3249 3127 3191 2954 3192 2954 3149 3133 3148 3135 3053 3087 3005ZM2953 3062 3064 3061 3065 3105 2954 3106ZM1925 3006 1894 3066 2058 3067 2058 3102 1915 3103 1872 3143 1872 3200 1921 3248 2036 3248 2063 3223 2065 3248 2133 3248 2134 3054 2085 3005ZM1956 3162 1959 3158 2046 3158 2048 3178 1958 3179ZM2604 3005 2559 3053 2558 3175 2606 3225 2706 3224 2729 3205 2730 3270 2612 3271 2576 3333 2752 3332 2800 3284 2800 3051 2756 3004ZM2629 3068 2730 3067 2730 3161 2630 3162ZM1532 2918 1531 3247 1605 3248 1607 3071 1711 3071 1711 3248 1785 3249 1785 3056 1736 3007 1632 3007 1607 3031 1606 2918ZM2078 1862 1931 2009 1931 2491 2077 2639 2541 2640 2698 2468 2147 2467 2147 2320 2732 2319 2732 2008 2586 1862ZM2146 2034 2519 2033 2519 2178 2147 2179ZM3161 1656 2955 1793 2902 1865 2901 2032 2960 2034 2959 2545 3051 2639 3385 2640 3386 2471 3170 2470 3170 2034 3440 2033 3440 1862 3171 1862 3169 1759ZM2403 1135 1964 1134 1577 1615 1237 1134 784 1134 1399 1950 1399 2809 1747 2583 1748 1945Z"/></svg></div>
     <p data-i18n="legal"></p>
     <p dir="ltr">© <span id="year"></span> YET-CHANGE, Hamria, Meknès. WhatsApp +212 7 06 74 48 33</p>
   </footer>
@@ -196,7 +202,7 @@ const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSXFGZCet
 /* OPTIONNEL : historique réel pour l’onglet « Courbe 3 mois ».
    Collez ici le lien CSV publié d’un onglet avec les colonnes : Date (AAAA-MM-JJ), Devise, Vente (une ligne par jour et par devise).
    Tant que ce champ est vide, la courbe est une ILLUSTRATION signalée comme telle et plus bas / plus haut restent à « — ». */
-const HISTORY_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSXFGZCetwiZv-DYrv7qJD5BE2xNDN4mswHTNK_3CDVgYdt3KhhY1lo7NjGXvx7pNzlcRah0OtLh-b6/pub?gid=868313948&single=true&output=csv";
+const HISTORY_CSV_URL = "";
 
 /* Taux de secours (MAD pour 1 unité) : affichés uniquement si le réseau est coupé ou le tableau illisible. Valeurs d’exemple. */
 const MANUAL_UPDATED_AT = "2026-11-21T09:00:00+01:00";
@@ -309,7 +315,7 @@ let state = { rates: MANUAL_RATES, updated_at: MANUAL_UPDATED_AT, live: false, l
 try { const s = localStorage.getItem("yc-lang"); if (I18N[s]) lang = s; } catch (e) {}
 
 const T = (k, v = {}) => String(I18N[lang][k] ?? I18N.fr[k] ?? k).replace(/\{(\w+)\}/g, (_, x) => v[x] ?? "");
-const fmt = n => new Intl.NumberFormat(NUM[lang], { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
+const fmt = n => new Intl.NumberFormat(NUM[lang], { minimumFractionDigits: 2, maximumFractionDigits: 4 }).format(n);
 const fa = n => new Intl.NumberFormat(NUM[lang], { maximumFractionDigits: 2 }).format(n);
 const f2 = n => new Intl.NumberFormat(NUM[lang], { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
 const R = c => state.loading ? null : state.rates[c];
@@ -464,31 +470,34 @@ function drawChart() {
   CH = null; tip.hidden = !s || !s.real;
   if (!s) { box.innerHTML = ""; return; }
   if (s.real && !real) { box.innerHTML = ""; tip.textContent = T("ch_few"); return; }
-  const W = 600, H = 270, L = real ? 54 : 12, Rr = 12, Tp = 14, B = real ? 30 : 12, n = vals.length;
+  const w = box.clientWidth || 340, k = 600 / Math.max(280, w), fs = +(11.5 * k).toFixed(1), f1 = x => +(x * k).toFixed(1);
+  const W = 600, H = Math.round(Math.max(200, Math.min(340, w * .62)) * k);
+  const L = real ? Math.round(fs * 3.9) : Math.round(10 * k), Rr = Math.round(10 * k), Tp = Math.round(12 * k), B = real ? Math.round(fs * 2.6) : Math.round(10 * k), n = vals.length;
   const lo = Math.min(...vals), hi = Math.max(...vals), rng = (hi - lo) || 1;
   const X = i => L + i * (W - L - Rr) / (n - 1), Y = v => Tp + (1 - (v - lo) / rng) * (H - Tp - B);
   const P = vals.map((v, i) => [X(i), Y(v)]), d = curve(P), l = P[n - 1];
-  const txt = "font-size=\"12\" fill=\"rgba(255,255,255,.7)\" font-family=\"JetBrains Mono,monospace\"";
-  const grid = [hi, (hi + lo) / 2, lo].map(v => `<line x1="${L}" x2="${W - Rr}" y1="${Y(v)}" y2="${Y(v)}" stroke="rgba(242,201,76,.18)" stroke-dasharray="3 6"/>` + (real ? `<text x="${L - 8}" y="${Y(v) + 4}" text-anchor="end" ${txt}>${f2(v)}</text>` : "")).join("");
+  const txt = `font-size="${fs}" fill="rgba(255,255,255,.7)" font-family="JetBrains Mono,monospace"`;
+  const grid = [hi, (hi + lo) / 2, lo].map(v => `<line x1="${L}" x2="${W - Rr}" y1="${Y(v)}" y2="${Y(v)}" stroke="rgba(242,201,76,.18)" stroke-dasharray="${f1(3)} ${f1(6)}"/>` + (real ? `<text x="${L - Math.round(fs * .6)}" y="${+(Y(v) + fs * .35).toFixed(1)}" text-anchor="end" ${txt}>${f2(v)}</text>` : "")).join("");
   let xl = "";
   if (real) {
     const f = DF({ day: "2-digit", month: "short", timeZone: "UTC" });
-    xl = [...new Set([0, Math.round((n - 1) / 3), Math.round(2 * (n - 1) / 3), n - 1])].map(i => `<text x="${X(i)}" y="${H - 8}" text-anchor="${i === 0 ? "start" : i === n - 1 ? "end" : "middle"}" ${txt}>${f.format(s.pts[i].t)}</text>`).join("");
+    xl = [...new Set([0, Math.round((n - 1) / 3), Math.round(2 * (n - 1) / 3), n - 1])].map(i => `<text x="${X(i)}" y="${H - Math.round(fs * .6)}" text-anchor="${i === 0 ? "start" : i === n - 1 ? "end" : "middle"}" ${txt}>${f.format(s.pts[i].t)}</text>`).join("");
   }
   box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" class="block w-full" style="touch-action:pan-y;cursor:crosshair" role="img" aria-label="${c}"><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2C94C" stop-opacity=".34"/><stop offset="1" stop-color="#F2C94C" stop-opacity="0"/></linearGradient></defs>
     ${grid}${xl}
     <path d="${d}L${l[0]},${H - B}L${P[0][0]},${H - B}Z" fill="url(#cg)"/>
-    <path d="${d}" fill="none" stroke="#F2C94C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 6px rgba(242,201,76,.75))"/>
-    ${real ? P.map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="2.4" fill="#F2C94C"/>`).join("") : ""}
-    <circle class="pulse" cx="${l[0]}" cy="${l[1]}" r="9" fill="#F2C94C"/>
+    <path d="${d}" fill="none" stroke="#F2C94C" stroke-width="${f1(2.4)}" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 6px rgba(242,201,76,.75))"/>
+    ${real ? P.map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="${f1(1.7)}" fill="#F2C94C"/>`).join("") : ""}
+    <circle class="pulse" cx="${l[0]}" cy="${l[1]}" r="${f1(9)}" fill="#F2C94C"/>
     <line id="gl" x1="0" x2="0" y1="${Tp}" y2="${H - B}" stroke="rgba(255,255,255,.4)" visibility="hidden"/>
-    <circle id="act" cx="0" cy="0" r="6" fill="#030826" stroke="#F2C94C" stroke-width="2.5" visibility="hidden"/></svg>`;
+    <circle id="act" cx="0" cy="0" r="${f1(6)}" fill="#030826" stroke="#F2C94C" stroke-width="${f1(2.5)}" visibility="hidden"/></svg>`;
   if (real) { CH = { P, s, n, pl, W, L, Rr }; setActive(n - 1); }
 }
 $("#chCur").onchange = drawChart;
 document.querySelectorAll("[data-per]").forEach(b => b.onclick = () => { per = +b.dataset.per; drawChart(); });
 ["pointermove", "pointerdown"].forEach(ev => $("#chart").addEventListener(ev, hit));
 $("#chart").addEventListener("pointerleave", e => { if (e.pointerType === "mouse" && CH) setActive(CH.n - 1); });
+let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => { if (!$('[data-panel="2"]').hidden) drawChart(); }, 150); });
 
 /* ---- Statut Ouvert / Fermé (Africa/Casablanca) ---- */
 function nowMorocco() {
@@ -568,7 +577,7 @@ document.querySelectorAll("[data-lang]").forEach(b => b.onclick = () => applyLan
       drops[i] = y * fs > H && Math.random() > .96 ? 0 : y + .45;
     });
   }
-  const run = () => { if (!timer && !document.hidden) timer = setInterval(frame, 55); }, stop = () => { clearInterval(timer); timer = null; };
+  const run = () => { if (!timer && !document.hidden) timer = setInterval(frame, innerWidth < 768 ? 80 : 55); }, stop = () => { clearInterval(timer); timer = null; };
   size(); addEventListener("resize", size);
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) { for (let i = 0; i < 60; i++) frame(); return; }
   document.addEventListener("visibilitychange", () => document.hidden ? stop() : run()); run();
